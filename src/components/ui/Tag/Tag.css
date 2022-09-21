@@ -1,0 +1,38 @@
+.tag {
+  display: inline-block;
+  padding: 10px;
+  font-weight: 500;
+  color: var(--color-heading-display-text);
+  cursor: pointer;
+}
+
+.tag::before {
+  content: "";
+  margin-right: 13px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+.tag:hover {
+  color: var(--gray-3);
+}
+
+.tag.active {
+  border: 1px solid var(--purple-1);
+  border-radius: 5px;
+}
+
+.tag.success::before {
+  background-color: var(--color-success);
+}
+
+.tag.warning::before {
+  background-color: var(--color-warning);
+}
+
+.tag.danger::before {
+  background-color: var(--color-danger);
+}

@@ -1,13 +1,26 @@
 :root {
   --color-body: #161d31;
   --color-card: #283046;
-  --purple-1: #9b51e0;
+  --color-card-border: #3b4253;
 
   --color-heading: #b9b9c3;
+  --color-body-text: #b4b7bd;
+  --color-heading-display-text: #d0d2d6;
+
   --color-primary: #7367f0;
+  --color-primary-2: #8479f5;
   --color-success: #28c76f;
   --color-warning: #ff9f43;
   --color-danger: #ea5455;
 
+  --gray-3: #828282;
+
+  --purple-1: #9b51e0;
+
   --white: #ffffff;
+}
+
+.app {
+  height: 100%;
+  background-color: var(--color-body);
 }
