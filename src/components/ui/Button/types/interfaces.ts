@@ -1,6 +1,7 @@
+import { ReactNode } from 'react'
 type buttonTheme = 'default' | 'ghost'
 
 export interface ButtonProps {
-  title: string
+  children: ReactNode
   theme?: buttonTheme
 }

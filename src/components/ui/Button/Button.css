@@ -5,6 +5,7 @@
   border: none;
   color: var(--white);
   background-color: var(--color-primary);
+  cursor: pointer;
 }
 
 .button:hover {

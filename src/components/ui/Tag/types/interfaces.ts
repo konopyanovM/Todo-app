@@ -1,6 +1,9 @@
+import { ReactNode } from 'react'
+
 type tag = 'primary' | 'success' | 'warning' | 'danger'
 
 export interface TagProps {
-  title: string
+  children: ReactNode
+  isActive?: boolean
   type?: tag
 }
