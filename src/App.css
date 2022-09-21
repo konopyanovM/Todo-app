@@ -19,10 +19,13 @@
   --t-color-danger: rgba(234, 84, 85, 0.12);
 
   --gray-3: #828282;
+  --gray-5: #e0e0e0;
 
   --purple-1: #9b51e0;
 
   --white: #ffffff;
+
+  --color-transparent: rgba(0, 0, 0, 0);
 }
 
 .app {
