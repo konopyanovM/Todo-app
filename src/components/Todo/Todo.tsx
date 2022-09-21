@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import Badge from '../ui/Badge'
 import Button from '../ui/Button'
 import Tag from '../ui/Tag'
 import './Todo.css'
@@ -12,9 +13,13 @@ const Todo: FC<TodoProps> = () => {
         <div className='todo__sider'>
           <Button title='Новая задача'></Button>
           <Tag title='Продуктивность'></Tag>
-          <Tag title='Продуктивность' type='success'></Tag>
-          <Tag title='Продуктивность' type='warning'></Tag>
-          <Tag title='Продуктивность' type='danger'></Tag>
+          <Tag title='Образование' type='success'></Tag>
+          <Tag title='Здоровье' type='warning'></Tag>
+          <Tag title='Срочно' type='danger'></Tag>
+          <Badge title='Продуктивность' />
+          <Badge title='Образование' type='success' />
+          <Badge title='Здоровье' type='warning' />
+          <Badge title='Срочно' type='danger' />
         </div>
       </div>
     </div>

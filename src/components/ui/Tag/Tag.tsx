@@ -3,7 +3,7 @@ import './Tag.css'
 import { TagProps } from './types'
 
 const Tag: FC<TagProps> = ({ title, type = 'primary' }) => {
-  return <div className={`tag ${type}`}>{title}</div>
+  return <span className={`tag ${type}`}>{title}</span>
 }
 
 export default Tag

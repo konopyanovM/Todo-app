@@ -13,6 +13,11 @@
   --color-warning: #ff9f43;
   --color-danger: #ea5455;
 
+  --t-color-primary: rgba(39, 114, 8, 0.12);
+  --t-color-success: rgba(40, 199, 111, 0.12);
+  --t-color-warning: rgba(255, 159, 67, 0.12);
+  --t-color-danger: rgba(234, 84, 85, 0.12);
+
   --gray-3: #828282;
 
   --purple-1: #9b51e0;
