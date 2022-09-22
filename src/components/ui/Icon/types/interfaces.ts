@@ -1,6 +1,7 @@
 type icon =
   | 'bucket'
   | 'star'
+  | 'search'
   | 'mail'
   | 'check'
   | 'dots'

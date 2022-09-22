@@ -7,18 +7,25 @@
 
 .input {
   padding: 7px 14px;
-  font-size: 12px;
   border-radius: 5px;
   border: 1px solid var(--color-card-border);
   background: none;
   color: var(--gray-5);
 }
 
+.input.ghost {
+  border: none;
+}
+
 .input:focus-visible {
   outline: none;
 }
 
-/* Input */
+/* Checkbox */
+
+.custom-checkbox {
+  display: none;
+}
 
 .input.checkbox {
   width: 18px;
@@ -32,7 +39,7 @@
   cursor: pointer;
 }
 
-.custom-checkbox {
+.input[type="checkbox"] + .custom-checkbox {
   position: relative;
   top: 4px;
   box-sizing: border-box;

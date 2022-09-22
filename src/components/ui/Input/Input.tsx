@@ -1,21 +1,24 @@
-import { FC, HTMLInputTypeAttribute } from 'react'
+import { FC } from 'react'
 import Icon from '../Icon'
 import './Input.css'
+import { InputProps } from './types'
 
-interface InputProps {
-  id?: string
-  type?: HTMLInputTypeAttribute
-  placeholder?: string
-}
-
-const Input: FC<InputProps> = ({ id, type = 'text', placeholder }) => {
+const Input: FC<InputProps> = ({
+  id,
+  type = 'text',
+  theme = 'default',
+  placeholder,
+  checked = false,
+  className,
+}) => {
   return (
     <label htmlFor={id} className='label'>
       <input
         id={id}
         type={type}
         placeholder={placeholder}
-        className={`input ${type}`}
+        checked={checked}
+        className={`input ${type} ${theme} ${className}`}
       />
       <span className='custom-checkbox'>
         <Icon type='check' size='small' className='custom-checkbox__icon' />

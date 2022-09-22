@@ -1,0 +1,19 @@
+.list-item {
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  outline: 1px solid var(--color-card-border);
+  gap: 20px;
+}
+
+.list-item__title {
+  flex-grow: 1;
+}
+
+.list-badges {
+  display: flex;
+  gap: 10px;
+}
+
+.list-badges__item {
+}

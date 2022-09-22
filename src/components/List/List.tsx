@@ -1,0 +1,32 @@
+import { FC } from 'react'
+import ListItem from '../ListItem'
+import Typography from '../ui/Typography'
+import './List.css'
+import { ListProps } from './types'
+
+const List: FC<ListProps> = ({ title, data }) => {
+  return (
+    <div className='list'>
+      <div className='list__wrapper'>
+        {title && (
+          <div className='list-header'>
+            <Typography type='heading'>{title}</Typography>
+          </div>
+        )}
+        <div className='list-body'>
+          <ul className='list-items'>
+            {data.map((item, index) => {
+              return (
+                <li key={index}>
+                  <ListItem item={item} />
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default List

@@ -1,6 +1,6 @@
-type badge = 'primary' | 'success' | 'warning' | 'danger'
+export type badge = 'primary' | 'success' | 'warning' | 'danger'
 
 export interface BadgeProps {
-  title: string
+  children: string
   type?: badge
 }

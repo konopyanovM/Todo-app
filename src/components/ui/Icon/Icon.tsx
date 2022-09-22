@@ -35,6 +35,9 @@ const Icon: FC<IconProps> = ({ type, size = 'medium', className }) => {
     case 'star':
       icon = require('../../../images/star.svg')
       break
+    case 'search':
+      icon = require('../../../images/search.svg')
+      break
   }
   const IconComponent = icon.ReactComponent
 
