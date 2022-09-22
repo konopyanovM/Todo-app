@@ -3,15 +3,14 @@
   min-height: 513px;
   display: flex;
   border-radius: 8px;
+  outline: 1px solid var(--color-card-border);
   overflow: hidden;
 }
 
 .todo-sider {
   min-width: 210px;
   background-color: var(--color-card);
-}
-.todo__body {
-  background-color: blueviolet;
+  outline: 1px solid var(--color-card-border);
 }
 
 .todo-header {
@@ -49,4 +48,12 @@
 .todo-footer {
   margin-top: 20px;
   padding-left: 20px;
+}
+
+.todo-body {
+  min-width: 1052px;
+  background-color: var(--color-card);
+  outline: 1px solid var(--color-card-border);
+}
+.todo-body__wrapper {
 }

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 import Tag from '../ui/Tag'
+import Typography from '../ui/Typography'
 import './Todo.css'
 
 interface TodoProps {}
@@ -43,7 +44,7 @@ const Todo: FC<TodoProps> = () => {
               </li>
             </ul>
             <div className='todo-footer'>
-              <p>Тэги</p>
+              <Typography type='small text'>Тэги</Typography>
               <ul className='todo-tags'>
                 <li>
                   <Tag isActive={true}>Мои задачи</Tag>
@@ -61,7 +62,9 @@ const Todo: FC<TodoProps> = () => {
             </div>
           </div>
         </div>
-        <div className='todo-body'></div>
+        <div className='todo-body'>
+          <div className='todo-body__wrapper'></div>
+        </div>
       </div>
     </div>
   )

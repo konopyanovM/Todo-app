@@ -1,0 +1,9 @@
+.typography {
+  color: var(--white);
+}
+
+.typography.small-text {
+  color: var(--color-heading);
+  font-size: 12px;
+  font-weight: 500;
+}
