@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { RouterEnum, RouterPathsEnum, TagsEnum } from '../../constants'
 import List from '../List'
-import { listItem } from '../List/types'
+import { ListItem } from '../List/types'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 import Input from '../ui/Input'
@@ -13,7 +13,7 @@ import './Todo.css'
 interface TodoProps {}
 
 const Todo: FC<TodoProps> = () => {
-  const [itemList, setItemList] = useState<listItem[]>([
+  const [itemList, setItemList] = useState<ListItem[]>([
     {
       id: 1,
       title: 'Title',

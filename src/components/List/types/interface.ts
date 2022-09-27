@@ -1,23 +1,23 @@
 import { badge } from './../../ui/Badge/types/interfaces'
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 
-export type badgeItem = {
+export type BadgeItem = {
   title: string
   type: badge
 }
 
-export type listItem = {
+export type ListItem = {
   id: number
   title: string
   endDate: string
   priority: string
   description: string
-  badges: badgeItem[]
+  badges: BadgeItem[]
   isCompleted: boolean
 }
 
 export interface ListProps {
   title?: ReactNode
-  data: listItem[]
-  setData: Dispatch<SetStateAction<listItem[]>>
+  data: ListItem[]
+  setData: Dispatch<SetStateAction<ListItem[]>>
 }

@@ -1,6 +1,6 @@
-import { listItem } from '../../List/types'
+import { ListItem } from '../../List/types'
 
 export interface ListItemProps {
-  item: listItem
+  item: ListItem
   checkboxHandler?: React.ChangeEventHandler<HTMLInputElement>
 }
