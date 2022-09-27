@@ -7,7 +7,7 @@ const Typography: FC<TypographyProps> = ({ type, children, className }) => {
     case 'text':
       return <p className={`typography text ${className}`}>{children}</p>
     case 'small text':
-      return <p className={`typography small text ${className}`}>{children}</p>
+      return <p className={`typography small-text ${className}`}>{children}</p>
     case 'heading':
       return <h2 className={`typography heading ${className}`}>{children}</h2>
     default:

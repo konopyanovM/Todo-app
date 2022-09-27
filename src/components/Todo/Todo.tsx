@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom'
 import { RouterEnum, RouterPathsEnum, TagsEnum } from '../../constants'
 import List from '../List'
 import { ListItem } from '../List/types'
+import Overlay from '../Overlay'
+import TodoForm from '../TodoForm'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 import Input from '../ui/Input'
@@ -105,6 +107,15 @@ const Todo: FC<TodoProps> = () => {
       isCompleted: false,
     },
   ])
+  const [isTodoFormOpened, setIsTodoFormOpened] = useState<boolean>(false)
+
+  const openTodoForm = () => {
+    setIsTodoFormOpened(true)
+  }
+
+  const closeTodoForm = () => {
+    setIsTodoFormOpened(false)
+  }
 
   return (
     <div className='todo'>
@@ -112,7 +123,7 @@ const Todo: FC<TodoProps> = () => {
         <div className='todo-sider'>
           <div className='todo-sider__wrapper'>
             <div className='todo-header'>
-              <Button>Новая задача</Button>
+              <Button onClick={openTodoForm}>Новая задача</Button>
             </div>
             <ul className='todo-menu'>
               <li>
@@ -183,6 +194,12 @@ const Todo: FC<TodoProps> = () => {
           </div>
         </div>
       </div>
+      {isTodoFormOpened && (
+        <>
+          <TodoForm closeHandler={closeTodoForm} />
+          <Overlay />
+        </>
+      )}
     </div>
   )
 }

@@ -4,6 +4,7 @@ type inputTheme = 'default' | 'ghost'
 export interface InputProps {
   id?: string
   type?: HTMLInputTypeAttribute
+  label?: string
   theme?: inputTheme
   placeholder?: string
   className?: string

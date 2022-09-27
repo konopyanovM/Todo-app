@@ -1,19 +1,30 @@
 import { FC } from 'react'
 import Icon from '../Icon'
+import Typography from '../Typography'
+import { typography } from '../Typography/types'
 import './Input.css'
 import { InputProps } from './types'
 
 const Input: FC<InputProps> = ({
   id,
   type = 'text',
+  label,
   theme = 'default',
   placeholder,
   checked = false,
   className,
   onChangeHandler = () => {},
 }) => {
+  const isCheckbox = type === 'checkbox'
+  const labelTypographyType: typography = isCheckbox ? 'text' : 'small text'
+
   return (
-    <label htmlFor={id} className='label'>
+    <label htmlFor={id} className={`label ${type}`}>
+      {label && (
+        <Typography type={labelTypographyType} className='label-text'>
+          {label}
+        </Typography>
+      )}
       <input
         id={id}
         type={type}

@@ -1,12 +1,16 @@
 .label {
-  width: 18px;
   height: max-content;
   position: relative;
   cursor: auto;
 }
 
+.label-text {
+  margin-bottom: 3px;
+}
+
 .input {
-  padding: 7px 14px;
+  min-width: 100%;
+  padding: 10px 20px;
   border-radius: 5px;
   border: 1px solid var(--color-card-border);
   background: none;
@@ -22,6 +26,18 @@
 }
 
 /* Checkbox */
+
+.label.checkbox {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label.checkbox > .label-text {
+  margin: 0;
+}
 
 .custom-checkbox {
   display: none;
@@ -41,7 +57,6 @@
 
 .input[type="checkbox"] + .custom-checkbox {
   position: relative;
-  top: 4px;
   box-sizing: border-box;
   width: 18px;
   height: 18px;
