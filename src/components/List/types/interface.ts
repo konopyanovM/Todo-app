@@ -1,5 +1,5 @@
 import { badge } from './../../ui/Badge/types/interfaces'
-import { ReactNode } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export type badgeItem = {
   title: string
@@ -19,4 +19,5 @@ export type listItem = {
 export interface ListProps {
   title?: ReactNode
   data: listItem[]
+  setData: Dispatch<SetStateAction<listItem[]>>
 }

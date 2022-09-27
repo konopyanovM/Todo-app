@@ -6,11 +6,15 @@ import Typography from '../ui/Typography'
 import './ListItem.css'
 import { ListItemProps } from './types'
 
-const ListItem: FC<ListItemProps> = ({ item }) => {
+const ListItem: FC<ListItemProps> = ({ item, checkboxHandler }) => {
   return (
     <span className='list-item'>
       <span className='list-item__checkbox'>
-        <Input type='checkbox' checked={item.isCompleted} />
+        <Input
+          type='checkbox'
+          checked={item.isCompleted}
+          onChangeHandler={checkboxHandler}
+        />
       </span>
       <Typography type='text' className='list-item__title'>
         {item.title}

@@ -10,6 +10,7 @@ const Input: FC<InputProps> = ({
   placeholder,
   checked = false,
   className,
+  onChangeHandler = () => {},
 }) => {
   return (
     <label htmlFor={id} className='label'>
@@ -19,6 +20,7 @@ const Input: FC<InputProps> = ({
         placeholder={placeholder}
         checked={checked}
         className={`input ${type} ${theme} ${className}`}
+        onChange={onChangeHandler}
       />
       <span className='custom-checkbox'>
         <Icon type='check' size='small' className='custom-checkbox__icon' />

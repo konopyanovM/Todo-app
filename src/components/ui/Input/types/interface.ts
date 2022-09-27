@@ -8,4 +8,5 @@ export interface InputProps {
   placeholder?: string
   className?: string
   checked?: boolean
+  onChangeHandler?: React.ChangeEventHandler<HTMLInputElement>
 }

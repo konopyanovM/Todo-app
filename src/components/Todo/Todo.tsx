@@ -32,6 +32,78 @@ const Todo: FC<TodoProps> = () => {
       ],
       isCompleted: false,
     },
+    {
+      id: 2,
+      title: 'Title 2',
+      endDate: 'asasfs',
+      priority: 'safasf',
+      description: 'sdfaf',
+      badges: [
+        {
+          title: 'Продуктивность',
+          type: 'primary',
+        },
+        {
+          title: 'Срочно',
+          type: 'danger',
+        },
+      ],
+      isCompleted: true,
+    },
+    {
+      id: 3,
+      title: 'Title 3',
+      endDate: 'asasfs',
+      priority: 'safasf',
+      description: 'sdfaf',
+      badges: [
+        {
+          title: 'Продуктивность',
+          type: 'primary',
+        },
+        {
+          title: 'Срочно',
+          type: 'danger',
+        },
+      ],
+      isCompleted: false,
+    },
+    {
+      id: 4,
+      title: 'Title 4',
+      endDate: 'asasfs',
+      priority: 'safasf',
+      description: 'sdfaf',
+      badges: [
+        {
+          title: 'Продуктивность',
+          type: 'primary',
+        },
+        {
+          title: 'Срочно',
+          type: 'danger',
+        },
+      ],
+      isCompleted: false,
+    },
+    {
+      id: 5,
+      title: 'Title 5',
+      endDate: 'asasfs',
+      priority: 'safasf',
+      description: 'sdfaf',
+      badges: [
+        {
+          title: 'Продуктивность',
+          type: 'primary',
+        },
+        {
+          title: 'Срочно',
+          type: 'danger',
+        },
+      ],
+      isCompleted: false,
+    },
   ])
 
   return (
@@ -106,7 +178,7 @@ const Todo: FC<TodoProps> = () => {
               <Input theme='ghost' placeholder='Поиск'></Input>
             </div>
             <div className='todo-list'>
-              <List title='Мои задачи' data={itemList} />
+              <List title='Мои задачи' data={itemList} setData={setItemList} />
             </div>
           </div>
         </div>
