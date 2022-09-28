@@ -45,6 +45,10 @@
   background-color: var(--color-primary);
 }
 
+.todo-menu__item-link.active .icon {
+  color: var(--purple-1);
+}
+
 .todo-menu__item-icon {
   margin-right: 11px;
 }

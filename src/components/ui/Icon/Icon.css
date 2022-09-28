@@ -1,3 +1,7 @@
+.icon {
+  color: var(--color-heading-display-text);
+}
+
 .icon.medium {
   width: 18px;
   height: 18px;
