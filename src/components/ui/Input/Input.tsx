@@ -10,6 +10,8 @@ const Input: FC<InputProps> = ({
   register,
   type = 'text',
   label,
+  isError,
+  errorMessage,
   theme = 'default',
   placeholder,
   checked = false,
@@ -31,12 +33,19 @@ const Input: FC<InputProps> = ({
         id={id}
         type={type}
         placeholder={placeholder}
-        className={`input ${type} ${theme} ${className}`}
+        className={`input ${type} ${theme} ${className} ${
+          isError && '--error'
+        }`}
         onChange={onChangeHandler}
       />
       <span className='custom-checkbox'>
         <Icon type='check' size='small' className='custom-checkbox__icon' />
       </span>
+      {isError && (
+        <Typography type='error' className='label-error'>
+          {errorMessage}
+        </Typography>
+      )}
     </label>
   )
 }

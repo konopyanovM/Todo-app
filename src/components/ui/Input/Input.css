@@ -8,6 +8,10 @@
   margin-bottom: 3px;
 }
 
+.label-error {
+  margin-top: 3px;
+}
+
 .input {
   min-width: 100%;
   padding: 10px 20px;
@@ -25,6 +29,9 @@
   outline: none;
 }
 
+.input.--error {
+  border-color: red;
+}
 /* Checkbox */
 
 .label.checkbox {

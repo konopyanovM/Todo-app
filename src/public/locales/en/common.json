@@ -17,5 +17,6 @@
   "delete": "Delete",
   "title": "Title",
   "todoCompletionDate": "Todo completion date",
-  "todoTitle": "Todo title"
+  "todoTitle": "Todo title",
+  "theFieldMustNotBeEmpty": "The field must not be empty!"
 }

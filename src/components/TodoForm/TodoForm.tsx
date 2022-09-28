@@ -14,13 +14,18 @@ import './TodoForm.css'
 import { TodoFormProps } from './types'
 
 const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
-  const { register, handleSubmit } = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
   const tagsList = [
     TagsEnum.PRODUCTIVITY,
     TagsEnum.HEALTH,
     TagsEnum.EDUCATION,
     TagsEnum.URGENT,
   ]
+  console.log(errors)
 
   // Redux
   const dispatch = useDispatch()
@@ -40,7 +45,7 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
         const key = Object.keys(item)[0]
         return key
       })
-
+    closeHandler()
     dispatch(addItem(data))
   }
 
@@ -65,9 +70,13 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
               className='todo-form__body-wrapper'
             >
               <Input
-                register={register(TodoFormEnum.TITLE)}
+                register={register(TodoFormEnum.TITLE, {
+                  required: 'theFieldMustNotBeEmpty',
+                })}
                 label={t('title')}
                 placeholder={t('todoTitle')}
+                isError={!!errors.title}
+                errorMessage={t(errors.title?.message as string)}
               />
               <Input
                 register={register(TodoFormEnum.END_DATE)}
@@ -80,9 +89,13 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
                 type='checkbox'
               />
               <Input
-                register={register(TodoFormEnum.DESCRIPTION)}
+                register={register(TodoFormEnum.DESCRIPTION, {
+                  required: 'theFieldMustNotBeEmpty',
+                })}
                 label={t('todoDescription')}
                 placeholder={t('todoTitle')}
+                isError={!!errors.description}
+                errorMessage={t(errors.description?.message as string)}
               />
               <div className='todo-form-tags'>
                 <Typography type='small text'>{t('tags')}</Typography>

@@ -17,5 +17,6 @@
   "delete": "Удалить",
   "title": "Название",
   "todoCompletionDate": "Дата завершения задачи",
-  "todoTitle": "Название задачи"
+  "todoTitle": "Название задачи",
+  "theFieldMustNotBeEmpty": "Поле не должно быть пустым!"
 }

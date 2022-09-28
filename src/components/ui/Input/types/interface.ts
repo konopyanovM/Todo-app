@@ -1,5 +1,5 @@
 import { HTMLInputTypeAttribute } from 'react'
-import { UseFormRegisterReturn } from 'react-hook-form'
+import { FieldErrorsImpl, UseFormRegisterReturn } from 'react-hook-form'
 
 type inputTheme = 'default' | 'ghost'
 
@@ -8,6 +8,8 @@ export interface InputProps {
   register?: UseFormRegisterReturn
   type?: HTMLInputTypeAttribute
   label?: string
+  isError?: boolean
+  errorMessage?: string
   theme?: inputTheme
   placeholder?: string
   className?: string

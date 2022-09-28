@@ -1,3 +1,3 @@
 export interface TodoFormProps {
-  closeHandler: React.MouseEventHandler
+  closeHandler: () => void
 }
