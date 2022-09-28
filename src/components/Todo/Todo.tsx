@@ -1,4 +1,5 @@
 import { FC, useState } from 'react'
+import { WithTranslation, withTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
 import { RouterEnum, RouterPathsEnum, TagsEnum } from '../../constants'
 import List from '../List'
@@ -14,7 +15,7 @@ import './Todo.css'
 
 interface TodoProps {}
 
-const Todo: FC<TodoProps> = () => {
+const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
   const [itemList, setItemList] = useState<ListItem[]>([
     {
       id: 1,
@@ -123,7 +124,7 @@ const Todo: FC<TodoProps> = () => {
         <div className='todo-sider'>
           <div className='todo-sider__wrapper'>
             <div className='todo-header'>
-              <Button onClick={openTodoForm}>Новая задача</Button>
+              <Button onClick={openTodoForm}>{t('newTodo')}</Button>
             </div>
             <ul className='todo-menu'>
               <li>
@@ -132,7 +133,7 @@ const Todo: FC<TodoProps> = () => {
                   className='todo-menu__item-link'
                 >
                   <Icon type='mail' className='todo-menu__item-icon' />
-                  <span>{RouterEnum.MY_TASKS}</span>
+                  <span>{t(RouterEnum.MY_TASKS)}</span>
                 </NavLink>
               </li>
               <li>
@@ -141,7 +142,7 @@ const Todo: FC<TodoProps> = () => {
                   className='todo-menu__item-link'
                 >
                   <Icon type='star' className='todo-menu__item-icon' />
-                  <span>{RouterEnum.IMPORTANT}</span>
+                  <span>{t(RouterEnum.IMPORTANT)}</span>
                 </NavLink>
               </li>
               <li>
@@ -150,7 +151,7 @@ const Todo: FC<TodoProps> = () => {
                   className='todo-menu__item-link'
                 >
                   <Icon type='check' className='todo-menu__item-icon' />
-                  <span>{RouterEnum.COMPLETED}</span>
+                  <span>{t(RouterEnum.COMPLETED)}</span>
                 </NavLink>
               </li>
               <li>
@@ -159,24 +160,24 @@ const Todo: FC<TodoProps> = () => {
                   className='todo-menu__item-link'
                 >
                   <Icon type='bucket' className='todo-menu__item-icon' />
-                  <span>{RouterEnum.DELETED}</span>
+                  <span>{t(RouterEnum.DELETED)}</span>
                 </NavLink>
               </li>
             </ul>
             <div className='todo-footer'>
-              <Typography type='small text'>Тэги</Typography>
+              <Typography type='small text'>{t('tags')}</Typography>
               <ul className='todo-tags'>
                 <li>
-                  <Tag isActive={true}>{TagsEnum.PRODUCTIVITY}</Tag>
+                  <Tag isActive={true}>{t(TagsEnum.PRODUCTIVITY)}</Tag>
                 </li>
                 <li>
-                  <Tag type='success'>{TagsEnum.EDUCATION}</Tag>
+                  <Tag type='success'>{t(TagsEnum.EDUCATION)}</Tag>
                 </li>
                 <li>
-                  <Tag type='warning'>{TagsEnum.HEALTH}</Tag>
+                  <Tag type='warning'>{t(TagsEnum.HEALTH)}</Tag>
                 </li>
                 <li>
-                  <Tag type='danger'>{TagsEnum.URGENT}</Tag>
+                  <Tag type='danger'>{t(TagsEnum.URGENT)}</Tag>
                 </li>
               </ul>
             </div>
@@ -186,10 +187,14 @@ const Todo: FC<TodoProps> = () => {
           <div className='todo-body__wrapper'>
             <div className='todo-search'>
               <Icon type='search' />
-              <Input theme='ghost' placeholder='Поиск'></Input>
+              <Input theme='ghost' placeholder={t('search')}></Input>
             </div>
             <div className='todo-list'>
-              <List title='Мои задачи' data={itemList} setData={setItemList} />
+              <List
+                title={t('myTodos')}
+                data={itemList}
+                setData={setItemList}
+              />
             </div>
           </div>
         </div>
@@ -204,4 +209,4 @@ const Todo: FC<TodoProps> = () => {
   )
 }
 
-export default Todo
+export default withTranslation()(Todo)

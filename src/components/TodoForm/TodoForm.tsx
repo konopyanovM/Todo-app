@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { WithTranslation, withTranslation } from 'react-i18next'
 import { TagsEnum } from '../../constants'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
@@ -10,13 +11,13 @@ interface TodoFormProps {
   closeHandler: React.MouseEventHandler
 }
 
-const TodoForm: FC<TodoFormProps> = ({ closeHandler }) => {
+const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
   return (
     <div className='todo-form'>
       <div className='todo-form__wrapper'>
         <div className='todo-form__header'>
           <Typography type='heading' className='todo-form__title'>
-            Задача
+            {t('todo')}
           </Typography>
           <div className='todo-form__button'>
             <Icon type='star' size='large' />
@@ -27,25 +28,25 @@ const TodoForm: FC<TodoFormProps> = ({ closeHandler }) => {
         </div>
         <div className='todo-form__body'>
           <form className='todo-form__body-wrapper'>
-            <Input label='Название' placeholder='Название задачи' />
+            <Input label={t('title')} placeholder={t('todoTitle')} />
             <Input
-              label='Дата завершения задачи'
-              placeholder='Название задачи'
+              label={t('todoCompletionDate')}
+              placeholder={t('todoTitle')}
             />
-            <Input label='Важная задача' type='checkbox' />
-            <Input label='Описание задачи' placeholder='Название задачи' />
+            <Input label={t('importantTodo')} type='checkbox' />
+            <Input label={t('todoDescription')} placeholder={t('todoTitle')} />
             <div className='todo-form-tags'>
-              <Typography type='small text'>Тэги</Typography>
+              <Typography type='small text'>{t('tags')}</Typography>
               <div className='todo-form-tags__list'>
-                <Input label={TagsEnum.PRODUCTIVITY} type='checkbox' />
-                <Input label={TagsEnum.HEALTH} type='checkbox' />
-                <Input label={TagsEnum.EDUCATION} type='checkbox' />
-                <Input label={TagsEnum.URGENT} type='checkbox' />
+                <Input label={t(TagsEnum.PRODUCTIVITY)} type='checkbox' />
+                <Input label={t(TagsEnum.HEALTH)} type='checkbox' />
+                <Input label={t(TagsEnum.EDUCATION)} type='checkbox' />
+                <Input label={t(TagsEnum.URGENT)} type='checkbox' />
               </div>
             </div>
             <div className='todo-form-buttons'>
-              <Button>Добавить</Button>
-              <Button theme='ghost'>Удалить</Button>
+              <Button>{t('add')}</Button>
+              <Button theme='ghost'>{t('delete')}</Button>
             </div>
           </form>
         </div>
@@ -54,4 +55,4 @@ const TodoForm: FC<TodoFormProps> = ({ closeHandler }) => {
   )
 }
 
-export default TodoForm
+export default withTranslation()(TodoForm)

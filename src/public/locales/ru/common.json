@@ -1,3 +1,21 @@
 {
-  "newTask": "Новая задача"
+  "todo": "Задача",
+  "newTodo": "Новая задача",
+  "myTodos": "Мои задачи",
+  "importantTodo": "Важная задача",
+  "todoDescription": "Описание задачи",
+  "tags": "Тэги",
+  "productivity": "Продуктивность",
+  "education": "Образование",
+  "health": "Здоровье",
+  "urgent": "Срочно",
+  "important": "Важное",
+  "completed": "Выполненные",
+  "deleted": "Удаленные",
+  "search": "Поиск",
+  "add": "Добавить",
+  "delete": "Удалить",
+  "title": "Название",
+  "todoCompletionDate": "Дата завершения задачи",
+  "todoTitle": "Название задачи"
 }
