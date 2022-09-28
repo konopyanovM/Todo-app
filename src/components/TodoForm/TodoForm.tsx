@@ -1,6 +1,7 @@
 import { FC } from 'react'
+import { useForm } from 'react-hook-form'
 import { WithTranslation, withTranslation } from 'react-i18next'
-import { TagsEnum } from '../../constants'
+import { TagsEnum, TodoFormEnum } from '../../constants'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 import Input from '../ui/Input'
@@ -12,6 +13,13 @@ interface TodoFormProps {
 }
 
 const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
+  const { register, handleSubmit } = useForm()
+
+  //TODO: types
+  const onSubmit = (data: any) => {
+    console.log(data)
+  }
+
   return (
     <div className='todo-form'>
       <div className='todo-form__wrapper'>
@@ -27,25 +35,61 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
           </div>
         </div>
         <div className='todo-form__body'>
-          <form className='todo-form__body-wrapper'>
-            <Input label={t('title')} placeholder={t('todoTitle')} />
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='todo-form__body-wrapper'
+          >
             <Input
+              register={register(TodoFormEnum.TITLE)}
+              label={t('title')}
+              placeholder={t('todoTitle')}
+            />
+            <Input
+              register={register(TodoFormEnum.COMPLETION_DATE)}
               label={t('todoCompletionDate')}
               placeholder={t('todoTitle')}
             />
-            <Input label={t('importantTodo')} type='checkbox' />
-            <Input label={t('todoDescription')} placeholder={t('todoTitle')} />
+            <Input
+              register={register(TodoFormEnum.IS_IMPORTANT)}
+              label={t('importantTodo')}
+              type='checkbox'
+            />
+            <Input
+              register={register(TodoFormEnum.DESCRIPTION)}
+              label={t('todoDescription')}
+              placeholder={t('todoTitle')}
+            />
             <div className='todo-form-tags'>
               <Typography type='small text'>{t('tags')}</Typography>
               <div className='todo-form-tags__list'>
-                <Input label={t(TagsEnum.PRODUCTIVITY)} type='checkbox' />
-                <Input label={t(TagsEnum.HEALTH)} type='checkbox' />
-                <Input label={t(TagsEnum.EDUCATION)} type='checkbox' />
-                <Input label={t(TagsEnum.URGENT)} type='checkbox' />
+                <Input
+                  label={t(TagsEnum.PRODUCTIVITY)}
+                  type='checkbox'
+                  register={register(
+                    `${TodoFormEnum.TAGS}.${TagsEnum.PRODUCTIVITY}`,
+                  )}
+                />
+                <Input
+                  label={t(TagsEnum.HEALTH)}
+                  type='checkbox'
+                  register={register(`${TodoFormEnum.TAGS}.${TagsEnum.HEALTH}`)}
+                />
+                <Input
+                  label={t(TagsEnum.EDUCATION)}
+                  type='checkbox'
+                  register={register(
+                    `${TodoFormEnum.TAGS}.${TagsEnum.EDUCATION}`,
+                  )}
+                />
+                <Input
+                  label={t(TagsEnum.URGENT)}
+                  type='checkbox'
+                  register={register(`${TodoFormEnum.TAGS}.${TagsEnum.URGENT}`)}
+                />
               </div>
             </div>
             <div className='todo-form-buttons'>
-              <Button>{t('add')}</Button>
+              <Button value={'add'}>{t('add')}</Button>
               <Button theme='ghost'>{t('delete')}</Button>
             </div>
           </form>

@@ -18,3 +18,11 @@ export enum RouterPathsEnum {
   COMPLETED = '/completed',
   DELETED = '/deleted',
 }
+
+export enum TodoFormEnum {
+  TITLE = 'title',
+  COMPLETION_DATE = 'completionDate',
+  IS_IMPORTANT = 'isImportant',
+  DESCRIPTION = 'description',
+  TAGS = 'tags',
+}

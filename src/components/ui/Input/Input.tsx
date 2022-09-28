@@ -7,6 +7,7 @@ import { InputProps } from './types'
 
 const Input: FC<InputProps> = ({
   id,
+  register,
   type = 'text',
   label,
   theme = 'default',
@@ -26,10 +27,10 @@ const Input: FC<InputProps> = ({
         </Typography>
       )}
       <input
+        {...register}
         id={id}
         type={type}
         placeholder={placeholder}
-        checked={checked}
         className={`input ${type} ${theme} ${className}`}
         onChange={onChangeHandler}
       />
