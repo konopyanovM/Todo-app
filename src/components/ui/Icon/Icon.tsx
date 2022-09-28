@@ -6,37 +6,37 @@ const Icon: FC<IconProps> = ({ type, size = 'medium', className }) => {
   let icon
   switch (type) {
     case 'arrow-left':
-      icon = require('../../../images/arrow-left.svg')
+      icon = require('../../../assets/images/arrow-left.svg')
       break
     case 'arrow-right':
-      icon = require('../../../images/arrow-right.svg')
+      icon = require('../../../assets/images/arrow-right.svg')
       break
     case 'bucket':
-      icon = require('../../../images/bucket.svg')
+      icon = require('../../../assets/images/bucket.svg')
       break
     case 'calendar':
-      icon = require('../../../images/calendar.svg')
+      icon = require('../../../assets/images/calendar.svg')
       break
     case 'check':
-      icon = require('../../../images/check.svg')
+      icon = require('../../../assets/images/check.svg')
       break
     case 'cross':
-      icon = require('../../../images/cross.svg')
+      icon = require('../../../assets/images/cross.svg')
       break
     case 'dots':
-      icon = require('../../../images/dots.svg')
+      icon = require('../../../assets/images/dots.svg')
       break
     case 'mail':
-      icon = require('../../../images/mail.svg')
+      icon = require('../../../assets/images/mail.svg')
       break
     case 'rotate':
-      icon = require('../../../images/rotate.svg')
+      icon = require('../../../assets/images/rotate.svg')
       break
     case 'star':
-      icon = require('../../../images/star.svg')
+      icon = require('../../../assets/images/star.svg')
       break
     case 'search':
-      icon = require('../../../images/search.svg')
+      icon = require('../../../assets/images/search.svg')
       break
   }
   const IconComponent = icon.ReactComponent
