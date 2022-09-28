@@ -45,6 +45,10 @@
   background-color: var(--color-primary);
 }
 
+.todo-menu__item-link.active .icon {
+  color: var(--purple-1);
+}
+
 .todo-menu__item-icon {
   margin-right: 11px;
 }
@@ -62,10 +66,10 @@
   background-color: var(--color-card);
   outline: 1px solid var(--color-card-border);
 }
-.todo-body__wrapper {
-}
 
 .todo-search {
   padding: 20px 40px;
+  display: flex;
+  align-items: center;
   outline: 1px solid var(--color-card-border);
 }

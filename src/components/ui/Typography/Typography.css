@@ -9,10 +9,17 @@
 }
 
 .typography.text {
+  font-size: 14px;
   color: var(--color-body-text);
 }
 
 .typography.heading {
   font-size: 19px;
   color: var(--color-heading);
+}
+
+.typography.error {
+  color: var(--color-danger);
+  font-size: 14px;
+  font-weight: 500;
 }

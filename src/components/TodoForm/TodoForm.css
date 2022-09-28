@@ -1,0 +1,72 @@
+.todo-form {
+  min-width: 360px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.todo-form__wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-form__header {
+  min-height: 44px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--color-body);
+}
+
+.todo-form__title {
+  flex-grow: 1;
+  color: var(--color-heading-display-text);
+}
+
+.todo-form__button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.todo-form__body {
+  padding: 20px;
+  flex-grow: 1;
+  background-color: var(--color-card);
+}
+
+.todo-form__body-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.todo-form__body-wrapper > .label {
+  flex-grow: 1;
+}
+
+.todo-form-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.todo-form-tags__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.todo-form-tags__list > label {
+  flex-basis: 40%;
+}
+
+.todo-form-buttons {
+  display: flex;
+  column-gap: 1.25rem;
+}

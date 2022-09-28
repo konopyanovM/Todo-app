@@ -1,8 +1,13 @@
 import { FC, useState } from 'react'
+import { WithTranslation, withTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { RouterEnum, RouterPathsEnum, TagsEnum } from '../../constants'
+import { selectTodos } from '../../store/todos/todosSlice'
 import List from '../List'
-import { listItem } from '../List/types'
+import { ListItem } from '../List/types'
+import Overlay from '../Overlay'
+import TodoForm from '../TodoForm'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 import Input from '../ui/Input'
@@ -12,99 +17,34 @@ import './Todo.css'
 
 interface TodoProps {}
 
-const Todo: FC<TodoProps> = () => {
-  const [itemList, setItemList] = useState<listItem[]>([
+const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
+  const [itemList, setItemList] = useState<ListItem[]>([
     {
       id: 1,
       title: 'Title',
       endDate: 'asasfs',
-      priority: 'safasf',
+      isImportant: false,
       description: 'sdfaf',
-      badges: [
-        {
-          title: 'Продуктивность',
-          type: 'primary',
-        },
-        {
-          title: 'Срочно',
-          type: 'danger',
-        },
-      ],
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      title: 'Title 2',
-      endDate: 'asasfs',
-      priority: 'safasf',
-      description: 'sdfaf',
-      badges: [
-        {
-          title: 'Продуктивность',
-          type: 'primary',
-        },
-        {
-          title: 'Срочно',
-          type: 'danger',
-        },
-      ],
-      isCompleted: true,
-    },
-    {
-      id: 3,
-      title: 'Title 3',
-      endDate: 'asasfs',
-      priority: 'safasf',
-      description: 'sdfaf',
-      badges: [
-        {
-          title: 'Продуктивность',
-          type: 'primary',
-        },
-        {
-          title: 'Срочно',
-          type: 'danger',
-        },
-      ],
-      isCompleted: false,
-    },
-    {
-      id: 4,
-      title: 'Title 4',
-      endDate: 'asasfs',
-      priority: 'safasf',
-      description: 'sdfaf',
-      badges: [
-        {
-          title: 'Продуктивность',
-          type: 'primary',
-        },
-        {
-          title: 'Срочно',
-          type: 'danger',
-        },
-      ],
-      isCompleted: false,
-    },
-    {
-      id: 5,
-      title: 'Title 5',
-      endDate: 'asasfs',
-      priority: 'safasf',
-      description: 'sdfaf',
-      badges: [
-        {
-          title: 'Продуктивность',
-          type: 'primary',
-        },
-        {
-          title: 'Срочно',
-          type: 'danger',
-        },
-      ],
+      badges: ['productivity', 'urgent', 'health', 'education'],
       isCompleted: false,
     },
   ])
+  const [isTodoFormOpened, setIsTodoFormOpened] = useState<boolean>(false)
+
+  // Redux
+  const { currentList } = useSelector(selectTodos)
+  //
+
+  // console.log(itemList)
+  // console.log(currentList)
+
+  const openTodoForm = () => {
+    setIsTodoFormOpened(true)
+  }
+
+  const closeTodoForm = () => {
+    setIsTodoFormOpened(false)
+  }
 
   return (
     <div className='todo'>
@@ -112,16 +52,17 @@ const Todo: FC<TodoProps> = () => {
         <div className='todo-sider'>
           <div className='todo-sider__wrapper'>
             <div className='todo-header'>
-              <Button>Новая задача</Button>
+              <Button onClick={openTodoForm}>{t('newTodo')}</Button>
             </div>
             <ul className='todo-menu'>
               <li>
                 <NavLink
+                  end
                   to={RouterPathsEnum.MY_TASKS}
                   className='todo-menu__item-link'
                 >
                   <Icon type='mail' className='todo-menu__item-icon' />
-                  <span>{RouterEnum.MY_TASKS}</span>
+                  <span>{t(RouterEnum.MY_TASKS)}</span>
                 </NavLink>
               </li>
               <li>
@@ -130,7 +71,7 @@ const Todo: FC<TodoProps> = () => {
                   className='todo-menu__item-link'
                 >
                   <Icon type='star' className='todo-menu__item-icon' />
-                  <span>{RouterEnum.IMPORTANT}</span>
+                  <span>{t(RouterEnum.IMPORTANT)}</span>
                 </NavLink>
               </li>
               <li>
@@ -139,7 +80,7 @@ const Todo: FC<TodoProps> = () => {
                   className='todo-menu__item-link'
                 >
                   <Icon type='check' className='todo-menu__item-icon' />
-                  <span>{RouterEnum.COMPLETED}</span>
+                  <span>{t(RouterEnum.COMPLETED)}</span>
                 </NavLink>
               </li>
               <li>
@@ -148,24 +89,24 @@ const Todo: FC<TodoProps> = () => {
                   className='todo-menu__item-link'
                 >
                   <Icon type='bucket' className='todo-menu__item-icon' />
-                  <span>{RouterEnum.DELETED}</span>
+                  <span>{t(RouterEnum.DELETED)}</span>
                 </NavLink>
               </li>
             </ul>
             <div className='todo-footer'>
-              <Typography type='small text'>Тэги</Typography>
+              <Typography type='small text'>{t('tags')}</Typography>
               <ul className='todo-tags'>
                 <li>
-                  <Tag isActive={true}>{TagsEnum.PRODUCTIVITY}</Tag>
+                  <Tag isActive={true}>{t(TagsEnum.PRODUCTIVITY)}</Tag>
                 </li>
                 <li>
-                  <Tag type='success'>{TagsEnum.EDUCATION}</Tag>
+                  <Tag type='success'>{t(TagsEnum.EDUCATION)}</Tag>
                 </li>
                 <li>
-                  <Tag type='warning'>{TagsEnum.HEALTH}</Tag>
+                  <Tag type='warning'>{t(TagsEnum.HEALTH)}</Tag>
                 </li>
                 <li>
-                  <Tag type='danger'>{TagsEnum.URGENT}</Tag>
+                  <Tag type='danger'>{t(TagsEnum.URGENT)}</Tag>
                 </li>
               </ul>
             </div>
@@ -175,16 +116,21 @@ const Todo: FC<TodoProps> = () => {
           <div className='todo-body__wrapper'>
             <div className='todo-search'>
               <Icon type='search' />
-              <Input theme='ghost' placeholder='Поиск'></Input>
+              <Input theme='ghost' placeholder={t('search')}></Input>
             </div>
             <div className='todo-list'>
-              <List title='Мои задачи' data={itemList} setData={setItemList} />
+              <List
+                title={t('myTodos')}
+                data={currentList}
+                setData={setItemList}
+              />
             </div>
           </div>
         </div>
       </div>
+      {isTodoFormOpened && <TodoForm closeHandler={closeTodoForm} />}
     </div>
   )
 }
 
-export default Todo
+export default withTranslation()(Todo)

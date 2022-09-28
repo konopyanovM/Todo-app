@@ -1,0 +1,22 @@
+{
+  "todo": "Todo",
+  "newTodo": "New todo",
+  "myTodos": "My todos",
+  "importantTodo": "Important todo",
+  "todoDescription": "Todo description",
+  "tags": "Tags",
+  "productivity": "Productivity",
+  "education": "Education",
+  "health": "Health",
+  "urgent": "Urgent",
+  "important": "Important",
+  "completed": "Completed",
+  "deleted": "Deleted",
+  "search": "Search",
+  "add": "Add",
+  "delete": "Delete",
+  "title": "Title",
+  "todoCompletionDate": "Todo completion date",
+  "todoTitle": "Todo title",
+  "theFieldMustNotBeEmpty": "The field must not be empty!"
+}

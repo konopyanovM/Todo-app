@@ -22,7 +22,11 @@ const List: FC<ListProps> = ({ title, data, setData }) => {
               }
               return (
                 <li key={index}>
-                  <ListItem item={item} checkboxHandler={checkboxHandler} />
+                  <ListItem
+                    item={item}
+                    checkboxHandler={checkboxHandler}
+                    isImportant={item.isImportant}
+                  />
                 </li>
               )
             })}

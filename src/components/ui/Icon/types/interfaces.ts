@@ -16,5 +16,6 @@ type iconSize = 'small' | 'medium' | 'large'
 export interface IconProps {
   type: icon
   size?: iconSize
+  fill?: string
   className?: string
 }

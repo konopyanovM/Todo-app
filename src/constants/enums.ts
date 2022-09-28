@@ -1,15 +1,15 @@
 export enum TagsEnum {
-  PRODUCTIVITY = 'Продуктивность',
-  EDUCATION = 'Образование',
-  HEALTH = 'Здоровье',
-  URGENT = 'Срочно',
+  PRODUCTIVITY = 'productivity',
+  EDUCATION = 'education',
+  HEALTH = 'health',
+  URGENT = 'urgent',
 }
 
 export enum RouterEnum {
-  MY_TASKS = 'Мои задачи',
-  IMPORTANT = 'Важные',
-  COMPLETED = 'Выполненные',
-  DELETED = 'Удаленные',
+  MY_TASKS = 'myTodos',
+  IMPORTANT = 'important',
+  COMPLETED = 'completed',
+  DELETED = 'deleted',
 }
 
 export enum RouterPathsEnum {
@@ -17,4 +17,12 @@ export enum RouterPathsEnum {
   IMPORTANT = '/important',
   COMPLETED = '/completed',
   DELETED = '/deleted',
+}
+
+export enum TodoFormEnum {
+  TITLE = 'title',
+  END_DATE = 'endDate',
+  IS_IMPORTANT = 'isImportant',
+  DESCRIPTION = 'description',
+  BADGES = 'badges',
 }

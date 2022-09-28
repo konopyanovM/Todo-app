@@ -22,3 +22,21 @@
   color: var(--color-primary-2);
   border: 1px solid var(--color-primary-2);
 }
+
+/* Disabled */
+
+.button.--disabled {
+  color: var(--color-body-text);
+  background-color: var(--color-card-border);
+  cursor: not-allowed;
+}
+
+.button.--disabled:hover {
+  background-color: auto;
+}
+
+.button.ghost.button.--disabled {
+  color: var(--color-body-text);
+  border: 1px solid var(--color-card-border);
+  cursor: not-allowed;
+}
