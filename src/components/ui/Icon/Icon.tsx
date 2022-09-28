@@ -2,7 +2,7 @@ import { FC } from 'react'
 import './Icon.css'
 import { IconProps } from './types'
 
-const Icon: FC<IconProps> = ({ type, size = 'medium', className }) => {
+const Icon: FC<IconProps> = ({ type, size = 'medium', fill, className }) => {
   let icon
   switch (type) {
     case 'arrow-left':
@@ -41,7 +41,12 @@ const Icon: FC<IconProps> = ({ type, size = 'medium', className }) => {
   }
   const IconComponent = icon.ReactComponent
 
-  return <IconComponent className={`icon ${size} ${className}`}></IconComponent>
+  return (
+    <IconComponent
+      className={`icon ${size} ${className}`}
+      style={{ color: fill }}
+    ></IconComponent>
+  )
 }
 
 export default Icon

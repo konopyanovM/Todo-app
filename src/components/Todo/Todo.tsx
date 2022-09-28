@@ -1,7 +1,9 @@
 import { FC, useState } from 'react'
 import { WithTranslation, withTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { RouterEnum, RouterPathsEnum, TagsEnum } from '../../constants'
+import { selectTodos } from '../../store/todos/todosSlice'
 import List from '../List'
 import { ListItem } from '../List/types'
 import Overlay from '../Overlay'
@@ -21,94 +23,20 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
       id: 1,
       title: 'Title',
       endDate: 'asasfs',
-      priority: 'safasf',
+      isImportant: false,
       description: 'sdfaf',
-      badges: [
-        {
-          title: 'Продуктивность',
-          type: 'primary',
-        },
-        {
-          title: 'Срочно',
-          type: 'danger',
-        },
-      ],
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      title: 'Title 2',
-      endDate: 'asasfs',
-      priority: 'safasf',
-      description: 'sdfaf',
-      badges: [
-        {
-          title: 'Продуктивность',
-          type: 'primary',
-        },
-        {
-          title: 'Срочно',
-          type: 'danger',
-        },
-      ],
-      isCompleted: true,
-    },
-    {
-      id: 3,
-      title: 'Title 3',
-      endDate: 'asasfs',
-      priority: 'safasf',
-      description: 'sdfaf',
-      badges: [
-        {
-          title: 'Продуктивность',
-          type: 'primary',
-        },
-        {
-          title: 'Срочно',
-          type: 'danger',
-        },
-      ],
-      isCompleted: false,
-    },
-    {
-      id: 4,
-      title: 'Title 4',
-      endDate: 'asasfs',
-      priority: 'safasf',
-      description: 'sdfaf',
-      badges: [
-        {
-          title: 'Продуктивность',
-          type: 'primary',
-        },
-        {
-          title: 'Срочно',
-          type: 'danger',
-        },
-      ],
-      isCompleted: false,
-    },
-    {
-      id: 5,
-      title: 'Title 5',
-      endDate: 'asasfs',
-      priority: 'safasf',
-      description: 'sdfaf',
-      badges: [
-        {
-          title: 'Продуктивность',
-          type: 'primary',
-        },
-        {
-          title: 'Срочно',
-          type: 'danger',
-        },
-      ],
+      badges: ['productivity', 'urgent', 'health', 'education'],
       isCompleted: false,
     },
   ])
   const [isTodoFormOpened, setIsTodoFormOpened] = useState<boolean>(false)
+
+  // Redux
+  const { currentList } = useSelector(selectTodos)
+  //
+
+  // console.log(itemList)
+  // console.log(currentList)
 
   const openTodoForm = () => {
     setIsTodoFormOpened(true)
@@ -129,6 +57,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
             <ul className='todo-menu'>
               <li>
                 <NavLink
+                  end
                   to={RouterPathsEnum.MY_TASKS}
                   className='todo-menu__item-link'
                 >
@@ -192,19 +121,14 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
             <div className='todo-list'>
               <List
                 title={t('myTodos')}
-                data={itemList}
+                data={currentList}
                 setData={setItemList}
               />
             </div>
           </div>
         </div>
       </div>
-      {isTodoFormOpened && (
-        <>
-          <TodoForm closeHandler={closeTodoForm} />
-          <Overlay />
-        </>
-      )}
+      {isTodoFormOpened && <TodoForm closeHandler={closeTodoForm} />}
     </div>
   )
 }

@@ -2,21 +2,24 @@
   padding: 1px 9px;
   display: inline-block;
   border-radius: 17px;
+}
+
+.badge.productivity {
   color: var(--color-primary);
   background-color: var(--t-color-primary);
 }
 
-.badge.success {
+.badge.education {
   color: var(--color-success);
   background-color: var(--t-color-success);
 }
 
-.badge.warning {
+.badge.health {
   color: var(--color-warning);
   background-color: var(--t-color-warning);
 }
 
-.badge.danger {
+.badge.urgent {
   color: var(--color-danger);
   background-color: var(--t-color-danger);
 }

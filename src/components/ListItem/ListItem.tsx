@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { WithTranslation, withTranslation } from 'react-i18next'
 import Badge from '../ui/Badge'
 import Icon from '../ui/Icon'
 import Input from '../ui/Input'
@@ -6,9 +7,14 @@ import Typography from '../ui/Typography'
 import './ListItem.css'
 import { ListItemProps } from './types'
 
-const ListItem: FC<ListItemProps> = ({ item, checkboxHandler }) => {
+const ListItem: FC<ListItemProps & WithTranslation> = ({
+  item,
+  isImportant,
+  checkboxHandler,
+  t,
+}) => {
   return (
-    <span className='list-item'>
+    <span className={`list-item ${isImportant && '--important'}`}>
       <span className='list-item__checkbox'>
         <Input
           type='checkbox'
@@ -23,7 +29,7 @@ const ListItem: FC<ListItemProps> = ({ item, checkboxHandler }) => {
         {item.badges.map((badge, index) => {
           return (
             <li key={index} className='list-badges__item'>
-              <Badge type={badge.type}>{badge.title}</Badge>
+              <Badge type={badge}>{t(badge)}</Badge>
             </li>
           )
         })}
@@ -35,4 +41,4 @@ const ListItem: FC<ListItemProps> = ({ item, checkboxHandler }) => {
   )
 }
 
-export default ListItem
+export default withTranslation()(ListItem)

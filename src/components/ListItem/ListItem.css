@@ -6,6 +6,10 @@
   gap: 20px;
 }
 
+.list-item:hover {
+  background-color: var(--color-card-hovered);
+}
+
 .list-item__title {
   flex-grow: 1;
 }
@@ -16,4 +20,11 @@
 }
 
 .list-badges__item {
+}
+
+/* Important */
+
+.list-item.--important .list-item__title {
+  font-weight: 600;
+  color: var(--yellow);
 }

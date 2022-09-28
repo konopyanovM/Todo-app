@@ -1,101 +1,116 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { WithTranslation, withTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
 import { TagsEnum, TodoFormEnum } from '../../constants'
+import { addItem } from '../../store/todos/todosSlice'
+import { ListItem } from '../List/types'
+import Overlay from '../Overlay'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 import Input from '../ui/Input'
 import Typography from '../ui/Typography'
 import './TodoForm.css'
-
-interface TodoFormProps {
-  closeHandler: React.MouseEventHandler
-}
+import { TodoFormProps } from './types'
 
 const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
   const { register, handleSubmit } = useForm()
+  const tagsList = [
+    TagsEnum.PRODUCTIVITY,
+    TagsEnum.HEALTH,
+    TagsEnum.EDUCATION,
+    TagsEnum.URGENT,
+  ]
+
+  // Redux
+  const dispatch = useDispatch()
+  //
 
   //TODO: types
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const onSubmit = (rawData: any) => {
+    const data: ListItem = rawData
+    data.id = 0
+    data.isCompleted = false
+    data.badges = rawData.badges
+      .filter((item: any) => {
+        const key = Object.keys(item)[0]
+        return item[key]
+      })
+      .map((item: any) => {
+        const key = Object.keys(item)[0]
+        return key
+      })
+
+    dispatch(addItem(data))
   }
 
   return (
-    <div className='todo-form'>
-      <div className='todo-form__wrapper'>
-        <div className='todo-form__header'>
-          <Typography type='heading' className='todo-form__title'>
-            {t('todo')}
-          </Typography>
-          <div className='todo-form__button'>
-            <Icon type='star' size='large' />
+    <>
+      <div className='todo-form'>
+        <div className='todo-form__wrapper'>
+          <div className='todo-form__header'>
+            <Typography type='heading' className='todo-form__title'>
+              {t('todo')}
+            </Typography>
+            <div className='todo-form__button'>
+              <Icon type='star' size='large' />
+            </div>
+            <div className='todo-form__button' onClick={closeHandler}>
+              <Icon type='cross' size='large' />
+            </div>
           </div>
-          <div className='todo-form__button' onClick={closeHandler}>
-            <Icon type='cross' size='large' />
-          </div>
-        </div>
-        <div className='todo-form__body'>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className='todo-form__body-wrapper'
-          >
-            <Input
-              register={register(TodoFormEnum.TITLE)}
-              label={t('title')}
-              placeholder={t('todoTitle')}
-            />
-            <Input
-              register={register(TodoFormEnum.COMPLETION_DATE)}
-              label={t('todoCompletionDate')}
-              placeholder={t('todoTitle')}
-            />
-            <Input
-              register={register(TodoFormEnum.IS_IMPORTANT)}
-              label={t('importantTodo')}
-              type='checkbox'
-            />
-            <Input
-              register={register(TodoFormEnum.DESCRIPTION)}
-              label={t('todoDescription')}
-              placeholder={t('todoTitle')}
-            />
-            <div className='todo-form-tags'>
-              <Typography type='small text'>{t('tags')}</Typography>
-              <div className='todo-form-tags__list'>
-                <Input
-                  label={t(TagsEnum.PRODUCTIVITY)}
-                  type='checkbox'
-                  register={register(
-                    `${TodoFormEnum.TAGS}.${TagsEnum.PRODUCTIVITY}`,
-                  )}
-                />
-                <Input
-                  label={t(TagsEnum.HEALTH)}
-                  type='checkbox'
-                  register={register(`${TodoFormEnum.TAGS}.${TagsEnum.HEALTH}`)}
-                />
-                <Input
-                  label={t(TagsEnum.EDUCATION)}
-                  type='checkbox'
-                  register={register(
-                    `${TodoFormEnum.TAGS}.${TagsEnum.EDUCATION}`,
-                  )}
-                />
-                <Input
-                  label={t(TagsEnum.URGENT)}
-                  type='checkbox'
-                  register={register(`${TodoFormEnum.TAGS}.${TagsEnum.URGENT}`)}
-                />
+          <div className='todo-form__body'>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className='todo-form__body-wrapper'
+            >
+              <Input
+                register={register(TodoFormEnum.TITLE)}
+                label={t('title')}
+                placeholder={t('todoTitle')}
+              />
+              <Input
+                register={register(TodoFormEnum.END_DATE)}
+                label={t('todoCompletionDate')}
+                placeholder={t('todoTitle')}
+              />
+              <Input
+                register={register(TodoFormEnum.IS_IMPORTANT)}
+                label={t('importantTodo')}
+                type='checkbox'
+              />
+              <Input
+                register={register(TodoFormEnum.DESCRIPTION)}
+                label={t('todoDescription')}
+                placeholder={t('todoTitle')}
+              />
+              <div className='todo-form-tags'>
+                <Typography type='small text'>{t('tags')}</Typography>
+                <div className='todo-form-tags__list'>
+                  {tagsList.map((tag, index) => {
+                    return (
+                      <Input
+                        key={index}
+                        label={t(tag)}
+                        type='checkbox'
+                        register={register(
+                          `${TodoFormEnum.BADGES}[${index}].${tag}`,
+                        )}
+                      />
+                    )
+                  })}
+                </div>
               </div>
-            </div>
-            <div className='todo-form-buttons'>
-              <Button value={'add'}>{t('add')}</Button>
-              <Button theme='ghost'>{t('delete')}</Button>
-            </div>
-          </form>
+              <div className='todo-form-buttons'>
+                <Button value={'add'}>{t('add')}</Button>
+                <Button theme='ghost'>{t('delete')}</Button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+      <Overlay onClick={closeHandler} />
+    </>
   )
 }
 

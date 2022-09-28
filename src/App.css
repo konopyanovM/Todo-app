@@ -1,6 +1,7 @@
 :root {
   --color-body: #161d31;
   --color-card: #283046;
+  --color-card-hovered: #242c43;
   --color-card-border: #3b4253;
 
   --color-heading: #b9b9c3;
@@ -22,6 +23,7 @@
   --gray-5: #e0e0e0;
 
   --purple-1: #9b51e0;
+  --yellow: #f2c94c;
 
   --white: #ffffff;
 
