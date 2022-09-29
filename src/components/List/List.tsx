@@ -5,6 +5,7 @@ import './List.css'
 import { ListProps } from './types'
 
 const List: FC<ListProps> = ({ title, data }) => {
+  const isDeleted = data.listType === 'deleted'
   return (
     <div className='list'>
       <div className='list__wrapper'>
@@ -17,7 +18,7 @@ const List: FC<ListProps> = ({ title, data }) => {
         )}
         <div className='list-body'>
           <ul className='list-items'>
-            {data.map((item, index, data) => {
+            {data.items.map((item, index) => {
               const checkboxHandler = () => {
                 item.isCompleted = !item.isCompleted
               }
@@ -25,6 +26,8 @@ const List: FC<ListProps> = ({ title, data }) => {
                 <li key={index}>
                   <ListItem
                     item={item}
+                    isDeleted={isDeleted}
+                    listType={data.listType}
                     checkboxHandler={checkboxHandler}
                     isImportant={item.isImportant}
                   />

@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { WithTranslation, withTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Route, Routes } from 'react-router-dom'
 import { RouterEnum, RouterPathsEnum, TagsEnum } from '../../constants'
 import { selectTodos } from '../../store/todos/todosSlice'
 import List from '../List'
@@ -21,7 +21,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
   const [isSiderMenuOpened, setSiderMenuOpened] = useState<boolean>(false) // Mobile only
 
   // Redux
-  const { currentList } = useSelector(selectTodos)
+  const { current, deleted } = useSelector(selectTodos)
   //
 
   const openTodoForm = () => {
@@ -30,6 +30,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
   const closeTodoForm = () => {
     setTodoFormOpened(false)
   }
+
   const openSiderMenu = () => {
     setSiderMenuOpened(true)
   }
@@ -131,7 +132,16 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
               </Button>
             </div>
             <div className='todo-list'>
-              <List title={t('myTodos')} data={currentList} />
+              <Routes>
+                <Route
+                  path={RouterPathsEnum.MY_TASKS}
+                  element={<List title={t('myTodos')} data={current} />}
+                />
+                <Route
+                  path={RouterPathsEnum.DELETED}
+                  element={<List title={t('myTodos')} data={deleted} />}
+                />
+              </Routes>
             </div>
           </div>
         </div>

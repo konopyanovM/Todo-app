@@ -1,9 +1,10 @@
 import { badge } from './../../ui/Badge/types/interfaces'
-import { Dispatch, ReactNode, SetStateAction } from 'react'
+import { ReactNode } from 'react'
 
-export interface ListProps {
-  title?: ReactNode
-  data: ListItem[]
+export type listType = 'current' | 'important' | 'completed' | 'deleted'
+export interface List {
+  listType: listType
+  items: ListItem[]
 }
 
 export type ListItem = {
@@ -14,4 +15,8 @@ export type ListItem = {
   description: string
   badges: badge[]
   isCompleted: boolean
+}
+export interface ListProps {
+  title?: ReactNode
+  data: List
 }
