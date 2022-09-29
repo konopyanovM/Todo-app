@@ -1,5 +1,4 @@
 .todo {
-  max-width: 1262px;
   flex-grow: 1;
 }
 
@@ -72,4 +71,78 @@
   display: flex;
   align-items: center;
   outline: 1px solid var(--color-card-border);
+}
+.todo-search label {
+  flex-grow: 1;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+  .todo {
+    max-width: 100%;
+  }
+  .todo__wrapper {
+    min-height: 100vh;
+    border-radius: 0;
+  }
+  .todo-sider {
+    position: absolute;
+    top: -100%;
+    left: 0;
+  }
+  .todo-search__add-todo {
+    padding: 0.2rem 0.75rem;
+    font-size: 24px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (min-width: 600px) {
+  .todo {
+    max-width: 100%;
+  }
+  .todo__wrapper {
+    min-height: 100vh;
+    border-radius: 0;
+  }
+  .todo-sider {
+    position: absolute;
+    top: -100%;
+    left: 0;
+  }
+  .todo-search__add-todo {
+    padding: 0.2rem 0.75rem;
+    font-size: 24px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width: 768px) {
+  .todo {
+    max-width: 691px;
+  }
+  .todo-sider {
+    position: static;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) {
+  .todo {
+    max-width: 892px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .todo {
+    max-width: 1080px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .app__wrapper {
+    max-width: 1242px;
+    margin: 0 auto;
+  }
 }

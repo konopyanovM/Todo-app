@@ -6,7 +6,6 @@ import { RouterEnum, RouterPathsEnum, TagsEnum } from '../../constants'
 import { selectTodos } from '../../store/todos/todosSlice'
 import List from '../List'
 import { ListItem } from '../List/types'
-import Overlay from '../Overlay'
 import TodoForm from '../TodoForm'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
@@ -117,13 +116,15 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
             <div className='todo-search'>
               <Icon type='search' />
               <Input theme='ghost' placeholder={t('search')}></Input>
+              <Button
+                onClick={openTodoForm}
+                className='todo-search__add-todo mobile'
+              >
+                +
+              </Button>
             </div>
             <div className='todo-list'>
-              <List
-                title={t('myTodos')}
-                data={currentList}
-                setData={setItemList}
-              />
+              <List title={t('myTodos')} data={currentList} />
             </div>
           </div>
         </div>

@@ -4,13 +4,15 @@ import Typography from '../ui/Typography'
 import './List.css'
 import { ListProps } from './types'
 
-const List: FC<ListProps> = ({ title, data, setData }) => {
+const List: FC<ListProps> = ({ title, data }) => {
   return (
     <div className='list'>
       <div className='list__wrapper'>
         {title && (
           <div className='list-header'>
-            <Typography type='heading'>{title}</Typography>
+            <Typography type='heading' className='list-header__title'>
+              {title}
+            </Typography>
           </div>
         )}
         <div className='list-body'>
@@ -18,7 +20,6 @@ const List: FC<ListProps> = ({ title, data, setData }) => {
             {data.map((item, index, data) => {
               const checkboxHandler = () => {
                 item.isCompleted = !item.isCompleted
-                setData(data)
               }
               return (
                 <li key={index}>

@@ -2,7 +2,11 @@ import { FC } from 'react'
 import { TypographyProps } from './types'
 import './Typography.css'
 
-const Typography: FC<TypographyProps> = ({ type, children, className }) => {
+const Typography: FC<TypographyProps> = ({
+  type,
+  children,
+  className = '',
+}) => {
   switch (type) {
     case 'text':
       return <p className={`typography text ${className}`}>{children}</p>

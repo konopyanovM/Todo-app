@@ -4,7 +4,6 @@ import { Dispatch, ReactNode, SetStateAction } from 'react'
 export interface ListProps {
   title?: ReactNode
   data: ListItem[]
-  setData: Dispatch<SetStateAction<ListItem[]>>
 }
 
 export type ListItem = {

@@ -8,10 +8,11 @@ const Button: FC<ButtonProps> = ({
   onClick,
   theme = 'default',
   isDisabled = false,
+  className = '',
 }) => {
   return (
     <button
-      className={`button ${theme} ${isDisabled && '--disabled'}`}
+      className={`button ${theme} ${isDisabled && '--disabled'} ${className}`}
       value={value}
       onClick={onClick}
     >
