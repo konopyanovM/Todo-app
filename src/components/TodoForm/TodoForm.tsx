@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { WithTranslation, withTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { TagsEnum, TodoFormEnum } from '../../constants'
-import { addItem } from '../../store/todos/todosSlice'
+import { addItem, selectTodos } from '../../store/todos/todosSlice'
 import { ListItem } from '../List/types'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
@@ -26,16 +26,16 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
     TagsEnum.EDUCATION,
     TagsEnum.URGENT,
   ]
-  console.log(errors)
 
   // Redux
   const dispatch = useDispatch()
+  const { id } = useSelector(selectTodos)
   //
 
   //TODO: types
   const onSubmit = (rawData: any) => {
     const data: ListItem = rawData
-    data.id = 0
+    data.id = id
     data.isCompleted = false
     data.badges = rawData.badges
       .filter((item: any) => {

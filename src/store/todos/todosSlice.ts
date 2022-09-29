@@ -4,10 +4,18 @@ import { RootState } from '../rootReducer'
 
 interface TodosState {
   currentList: ListItem[]
+  importantList: ListItem[]
+  completedList: ListItem[]
+  deletedList: ListItem[]
+  id: number
 }
 
 const initialState: TodosState = {
   currentList: [],
+  importantList: [],
+  completedList: [],
+  deletedList: [],
+  id: 0,
 }
 
 const todosSlice = createSlice({
@@ -15,6 +23,10 @@ const todosSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, { payload }: PayloadAction<ListItem>) => {
+      state.currentList.push(payload)
+      state.id++
+    },
+    deleteItem: (state, { payload }: PayloadAction<ListItem>) => {
       state.currentList.push(payload)
     },
   },
