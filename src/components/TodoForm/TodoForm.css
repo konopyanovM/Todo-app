@@ -80,3 +80,41 @@
   display: flex;
   column-gap: 1.25rem;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+  .todo-form {
+    min-width: 320px;
+  }
+  .todo-form__header {
+    min-height: 75px;
+    padding: 10px 30px;
+    gap: 1.5rem;
+  }
+  .todo-form__button .icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (min-width: 600px) and (max-width: 767px) {
+  .todo-form {
+    min-width: 480px;
+  }
+  .todo-form__header {
+    min-height: 75px;
+    padding: 10px 30px;
+    gap: 2rem;
+  }
+  .todo-form__header .todo-form__title {
+    font-size: 22px;
+  }
+  .todo-form__button .icon {
+    width: 24px;
+    height: 24px;
+  }
+  .todo-form-tags__list {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
