@@ -18,5 +18,6 @@
   "title": "Название",
   "todoCompletionDate": "Дата завершения задачи",
   "todoTitle": "Название задачи",
-  "theFieldMustNotBeEmpty": "Поле не должно быть пустым!"
+  "theFieldMustNotBeEmpty": "Поле не должно быть пустым!",
+  "atLeastOneItemMustBeSelected": "По крайней мере один пункт должен быть выбран!"
 }
