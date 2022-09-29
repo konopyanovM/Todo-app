@@ -1,3 +1,4 @@
+import { getItem, setItem } from './../../utils/localStorageAPI'
 import { listType } from './../../components/List/types/interface'
 import { List, ListItem } from '../../components/List/types/interface'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
@@ -16,7 +17,8 @@ interface deleteAction {
   listType: listType
 }
 
-const initialState: TodosState = {
+const LS_TODOS = 'todos'
+const emptyState = JSON.stringify({
   current: {
     listType: 'current',
     items: [],
@@ -34,7 +36,9 @@ const initialState: TodosState = {
     items: [],
   },
   id: 0,
-}
+})
+
+const initialState: TodosState = getItem(LS_TODOS, emptyState)
 
 const todosSlice = createSlice({
   name: 'todos',
@@ -43,6 +47,7 @@ const todosSlice = createSlice({
     addItem: (state, { payload }: PayloadAction<ListItem>) => {
       state.current.items.push(payload)
       state.id++
+      setItem(LS_TODOS, state)
     },
     deleteItem: (state, { payload }: PayloadAction<deleteAction>) => {
       // Сохраняем удаленную задачу
@@ -57,6 +62,7 @@ const todosSlice = createSlice({
       )
       // Добавляем ее в удаленные
       state.deleted.items.push(deletedItem)
+      setItem(LS_TODOS, state)
     },
     restoreItem: (state, { payload }: PayloadAction<number>) => {
       const restoredItem = state.deleted.items.filter((item) => {
@@ -66,6 +72,7 @@ const todosSlice = createSlice({
         return item.id !== payload
       })
       state.current.items.push(restoredItem)
+      setItem(LS_TODOS, state)
     },
   },
 })
