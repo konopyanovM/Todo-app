@@ -87,7 +87,7 @@
     min-width: 320px;
   }
   .todo-form__header {
-    min-height: 75px;
+    min-height: 54px;
     padding: 10px 30px;
     gap: 1.5rem;
   }

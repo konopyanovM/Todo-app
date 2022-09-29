@@ -82,16 +82,37 @@
     max-width: 100%;
   }
   .todo__wrapper {
+    position: relative;
     min-height: 100vh;
     border-radius: 0;
+    overflow: hidden;
   }
   .todo-sider {
+    height: 100%;
+    padding-top: 1rem;
     position: absolute;
-    top: -100%;
-    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: all 0.1s ease;
   }
-  .todo-search__add-todo {
-    padding: 0.2rem 0.75rem;
+  .todo-sider.--open {
+    transform: translateX(0);
+  }
+  .todo-header {
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .todo-search {
+    padding: 10px 15px;
+    gap: 0.5rem;
+  }
+  .todo-search__button {
+    padding: 0.1rem 0.65rem;
     font-size: 24px;
   }
 }
@@ -102,13 +123,33 @@
     max-width: 100%;
   }
   .todo__wrapper {
+    position: relative;
     min-height: 100vh;
     border-radius: 0;
+    overflow: hidden;
   }
   .todo-sider {
+    height: 100%;
+    padding-top: 1rem;
     position: absolute;
-    top: -100%;
-    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: all 0.1s ease;
+  }
+  .todo-sider.--open {
+    transform: translateX(0);
+  }
+  .todo-header {
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .todo-search {
+    gap: 1rem;
   }
   .todo-search__add-todo {
     padding: 0.2rem 0.75rem;
