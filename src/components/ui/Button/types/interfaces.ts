@@ -7,4 +7,5 @@ export interface ButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   theme?: buttonTheme
   isDisabled?: boolean
+  className?: string
 }

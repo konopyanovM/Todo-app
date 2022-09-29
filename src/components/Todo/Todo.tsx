@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom'
 import { RouterEnum, RouterPathsEnum, TagsEnum } from '../../constants'
 import { selectTodos } from '../../store/todos/todosSlice'
 import List from '../List'
-import { ListItem } from '../List/types'
 import Overlay from '../Overlay'
 import TodoForm from '../TodoForm'
 import Button from '../ui/Button'
@@ -18,41 +17,41 @@ import './Todo.css'
 interface TodoProps {}
 
 const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
-  const [itemList, setItemList] = useState<ListItem[]>([
-    {
-      id: 1,
-      title: 'Title',
-      endDate: 'asasfs',
-      isImportant: false,
-      description: 'sdfaf',
-      badges: ['productivity', 'urgent', 'health', 'education'],
-      isCompleted: false,
-    },
-  ])
-  const [isTodoFormOpened, setIsTodoFormOpened] = useState<boolean>(false)
+  const [isTodoFormOpened, setTodoFormOpened] = useState<boolean>(false)
+  const [isSiderMenuOpened, setSiderMenuOpened] = useState<boolean>(false) // Mobile only
 
   // Redux
   const { currentList } = useSelector(selectTodos)
   //
 
-  // console.log(itemList)
-  // console.log(currentList)
-
   const openTodoForm = () => {
-    setIsTodoFormOpened(true)
+    setTodoFormOpened(true)
   }
-
   const closeTodoForm = () => {
-    setIsTodoFormOpened(false)
+    setTodoFormOpened(false)
+  }
+  const openSiderMenu = () => {
+    setSiderMenuOpened(true)
+  }
+  const closeSiderMenu = () => {
+    setSiderMenuOpened(false)
   }
 
   return (
     <div className='todo'>
       <div className='todo__wrapper'>
-        <div className='todo-sider'>
+        <div className={`todo-sider ${isSiderMenuOpened && '--open'}`}>
           <div className='todo-sider__wrapper'>
             <div className='todo-header'>
-              <Button onClick={openTodoForm}>{t('newTodo')}</Button>
+              <Button onClick={openTodoForm} className='--desktop'>
+                {t('newTodo')}
+              </Button>
+              <div
+                className='todo-header__button --invisible'
+                onClick={closeSiderMenu}
+              >
+                <Icon type='cross' size='large'></Icon>
+              </div>
             </div>
             <ul className='todo-menu'>
               <li>
@@ -117,18 +116,35 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
             <div className='todo-search'>
               <Icon type='search' />
               <Input theme='ghost' placeholder={t('search')}></Input>
+              <Button
+                onClick={openTodoForm}
+                className='todo-search__button --mobile'
+              >
+                +
+              </Button>
+              <Button
+                onClick={openSiderMenu}
+                className='todo-search__button --mobile'
+                theme='ghost'
+              >
+                =
+              </Button>
             </div>
             <div className='todo-list'>
-              <List
-                title={t('myTodos')}
-                data={currentList}
-                setData={setItemList}
-              />
+              <List title={t('myTodos')} data={currentList} />
             </div>
           </div>
         </div>
       </div>
       {isTodoFormOpened && <TodoForm closeHandler={closeTodoForm} />}
+      {(isTodoFormOpened || isSiderMenuOpened) && (
+        <Overlay
+          onClick={() => {
+            closeTodoForm()
+            closeSiderMenu()
+          }}
+        />
+      )}
     </div>
   )
 }

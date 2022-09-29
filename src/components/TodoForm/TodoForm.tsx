@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux'
 import { TagsEnum, TodoFormEnum } from '../../constants'
 import { addItem } from '../../store/todos/todosSlice'
 import { ListItem } from '../List/types'
-import Overlay from '../Overlay'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 import Input from '../ui/Input'
@@ -142,7 +141,6 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
           </div>
         </div>
       </div>
-      <Overlay onClick={closeHandler} />
     </>
   )
 }
