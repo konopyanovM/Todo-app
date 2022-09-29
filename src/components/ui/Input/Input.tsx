@@ -10,12 +10,12 @@ const Input: FC<InputProps> = ({
   register,
   type = 'text',
   label,
-  isError,
+  isError = '',
   errorMessage,
   theme = 'default',
   placeholder,
   checked = false,
-  className,
+  className = '',
   onChangeHandler = () => {},
 }) => {
   const isCheckbox = type === 'checkbox'
@@ -33,7 +33,7 @@ const Input: FC<InputProps> = ({
         id={id}
         type={type}
         placeholder={placeholder}
-        className={`input ${type} ${theme} ${className} ${
+        className={`input ${type} --${theme} ${className} ${
           isError && '--error'
         }`}
         onChange={onChangeHandler}

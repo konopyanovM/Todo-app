@@ -21,7 +21,7 @@
   color: var(--gray-5);
 }
 
-.input.ghost {
+.input.--ghost {
   border: none;
 }
 

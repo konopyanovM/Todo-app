@@ -18,7 +18,9 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm({
+    mode: 'onChange',
+  })
   const tagsList = [
     TagsEnum.PRODUCTIVITY,
     TagsEnum.HEALTH,
@@ -99,20 +101,38 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
               />
               <div className='todo-form-tags'>
                 <Typography type='small text'>{t('tags')}</Typography>
-                <div className='todo-form-tags__list'>
+                <fieldset
+                  className={`todo-form-tags__list ${
+                    errors.badges && '--error'
+                  }`}
+                  {...register(TodoFormEnum.BADGES, {
+                    validate: (badges) => {
+                      badges = badges.filter((item: any) => {
+                        const key = Object.keys(item)[0]
+                        return item[key]
+                      })
+                      return badges.length || 'atLeastOneItemMustBeSelected'
+                    },
+                  })}
+                >
                   {tagsList.map((tag, index) => {
                     return (
                       <Input
                         key={index}
-                        label={t(tag)}
-                        type='checkbox'
                         register={register(
                           `${TodoFormEnum.BADGES}[${index}].${tag}`,
                         )}
+                        label={t(tag)}
+                        type='checkbox'
                       />
                     )
                   })}
-                </div>
+                </fieldset>
+                {errors.badges && (
+                  <Typography className='todo-form-tags__error' type='error'>
+                    {t(errors.badges.message as string)}
+                  </Typography>
+                )}
               </div>
               <div className='todo-form-buttons'>
                 <Button value={'add'}>{t('add')}</Button>
