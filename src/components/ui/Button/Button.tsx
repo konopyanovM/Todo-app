@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import './Button.css'
 import { ButtonProps } from './types'
 
@@ -10,11 +10,15 @@ const Button: FC<ButtonProps> = ({
   isDisabled = false,
   className = '',
 }) => {
+  const onClickHandler = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (onClick) onClick!()
+  }
   return (
     <button
       className={`button ${theme} ${isDisabled && '--disabled'} ${className}`}
       value={value}
-      onClick={onClick}
+      onClick={onClickHandler}
     >
       {children}
     </button>
