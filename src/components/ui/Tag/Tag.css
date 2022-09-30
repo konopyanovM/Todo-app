@@ -20,7 +20,7 @@
   color: var(--gray-3);
 }
 
-.tag.active {
+.tag.active:not(.--disabled) {
   border: 1px solid var(--purple-1);
   border-radius: 5px;
 }
@@ -35,4 +35,8 @@
 
 .tag.danger::before {
   background-color: var(--color-danger);
+}
+
+.tag.--disabled {
+  pointer-events: none;
 }

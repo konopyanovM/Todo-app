@@ -5,5 +5,7 @@ type tag = 'primary' | 'success' | 'warning' | 'danger'
 export interface TagProps {
   children: ReactNode
   isActive?: boolean
+  isDisabled?: boolean
   type?: tag
+  className?: string
 }

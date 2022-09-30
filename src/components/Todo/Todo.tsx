@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { WithTranslation, withTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { NavLink, Route, Routes, useLocation } from 'react-router-dom'
@@ -21,6 +21,8 @@ interface TodoProps {}
 const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
   const [isTodoFormOpened, setTodoFormOpened] = useState<boolean>(false)
   const [isSiderMenuOpened, setSiderMenuOpened] = useState<boolean>(false) // Mobile only
+  const [isMenuDisabled, setMenuDisabled] = useState<boolean>(false)
+  const [isTagsDisabled, setTagsDisabled] = useState<boolean>(true)
 
   const location = useLocation()
   const { todos } = useSelector(selectTodosState)
@@ -38,17 +40,23 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
     setCurrentList(getCurrentList(location.pathname))
   }, [location.pathname])
 
-  const onSearchHandler = () => {
+  const setMenu = (value: boolean) => {
+    setTagsDisabled(value)
+    setMenuDisabled(value)
+  }
+
+  const onSearchHandler = (e: React.MouseEvent) => {
+    e.preventDefault()
     if (!search) {
+      setMenu(false)
       setItemList(todos)
       return
     }
     const filtered = itemList[currentList].items.filter((item) => {
       return item.title.includes(search)
     })
+    setMenu(true)
     setItemList((prev) => {
-      console.log(prev[currentList])
-
       return {
         ...prev,
         [currentList]: {
@@ -94,7 +102,9 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
                 <NavLink
                   end
                   to={RouterPathsEnum.MY_TASKS}
-                  className='todo-menu__item-link'
+                  className={`todo-menu__item-link ${
+                    isMenuDisabled ? '--disabled' : ''
+                  }`}
                 >
                   <Icon type='mail' className='todo-menu__item-icon' />
                   <span>{t(RouterEnum.MY_TASKS)}</span>
@@ -103,7 +113,9 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
               <li>
                 <NavLink
                   to={RouterPathsEnum.IMPORTANT}
-                  className='todo-menu__item-link'
+                  className={`todo-menu__item-link ${
+                    isMenuDisabled ? '--disabled' : ''
+                  }`}
                 >
                   <Icon type='star' className='todo-menu__item-icon' />
                   <span>{t(RouterEnum.IMPORTANT)}</span>
@@ -112,7 +124,9 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
               <li>
                 <NavLink
                   to={RouterPathsEnum.COMPLETED}
-                  className='todo-menu__item-link'
+                  className={`todo-menu__item-link ${
+                    isMenuDisabled ? '--disabled' : ''
+                  }`}
                 >
                   <Icon type='check' className='todo-menu__item-icon' />
                   <span>{t(RouterEnum.COMPLETED)}</span>
@@ -121,7 +135,9 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
               <li>
                 <NavLink
                   to={RouterPathsEnum.DELETED}
-                  className='todo-menu__item-link'
+                  className={`todo-menu__item-link ${
+                    isMenuDisabled ? '--disabled' : ''
+                  }`}
                 >
                   <Icon type='bucket' className='todo-menu__item-icon' />
                   <span>{t(RouterEnum.DELETED)}</span>
@@ -132,16 +148,24 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
               <Typography type='small text'>{t('tags')}</Typography>
               <ul className='todo-tags'>
                 <li>
-                  <Tag isActive={true}>{t(TagsEnum.PRODUCTIVITY)}</Tag>
+                  <Tag isActive={true} isDisabled={isTagsDisabled}>
+                    {t(TagsEnum.PRODUCTIVITY)}
+                  </Tag>
                 </li>
                 <li>
-                  <Tag type='success'>{t(TagsEnum.EDUCATION)}</Tag>
+                  <Tag type='success' isDisabled={isTagsDisabled}>
+                    {t(TagsEnum.EDUCATION)}
+                  </Tag>
                 </li>
                 <li>
-                  <Tag type='warning'>{t(TagsEnum.HEALTH)}</Tag>
+                  <Tag type='warning' isDisabled={isTagsDisabled}>
+                    {t(TagsEnum.HEALTH)}
+                  </Tag>
                 </li>
                 <li>
-                  <Tag type='danger'>{t(TagsEnum.URGENT)}</Tag>
+                  <Tag type='danger' isDisabled={isTagsDisabled}>
+                    {t(TagsEnum.URGENT)}
+                  </Tag>
                 </li>
               </ul>
             </div>
@@ -149,10 +173,10 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
         </div>
         <div className='todo-body'>
           <div className='todo-body__wrapper'>
-            <div className='todo-search'>
-              <div className='todo-search__button' onClick={onSearchHandler}>
+            <form className='todo-search'>
+              <button className='todo-search__button' onClick={onSearchHandler}>
                 <Icon type='search' />
-              </div>
+              </button>
               <Input
                 theme='ghost'
                 placeholder={t('search')}
@@ -174,7 +198,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
               >
                 =
               </Button>
-            </div>
+            </form>
             <div className='todo-list'>
               <Routes>
                 <Route

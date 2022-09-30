@@ -28,11 +28,11 @@
   color: var(--color-heading-display-text);
 }
 
-.todo-menu__item-link.active {
+.todo-menu__item-link.active:not(.--disabled) {
   color: var(--purple-1);
 }
 
-.todo-menu__item-link.active::before {
+.todo-menu__item-link.active:not(.--disabled)::before {
   content: "";
   position: absolute;
   left: 0;
@@ -43,8 +43,12 @@
   background-color: var(--color-primary);
 }
 
-.todo-menu__item-link.active .icon {
+.todo-menu__item-link.active:not(.--disabled) .icon {
   color: var(--purple-1);
+}
+
+.todo-menu__item-link.--disabled {
+  pointer-events: none;
 }
 
 .todo-menu__item-icon {

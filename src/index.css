@@ -51,3 +51,8 @@ fieldset {
   padding: 0;
   border: none;
 }
+
+button {
+  border: none;
+  background: transparent;
+}
