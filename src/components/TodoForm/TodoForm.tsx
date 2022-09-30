@@ -134,7 +134,9 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
                 )}
               </div>
               <div className='todo-form-buttons'>
-                <Button value={'add'}>{t('add')}</Button>
+                <Button value={'add'} shouldPreventDefault={false}>
+                  {t('add')}
+                </Button>
                 <Button theme='ghost'>{t('delete')}</Button>
               </div>
             </form>

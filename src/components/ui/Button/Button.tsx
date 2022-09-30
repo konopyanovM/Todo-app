@@ -9,9 +9,10 @@ const Button: FC<ButtonProps> = ({
   theme = 'default',
   isDisabled = false,
   className = '',
+  shouldPreventDefault = true,
 }) => {
   const onClickHandler = (e: React.MouseEvent) => {
-    e.preventDefault()
+    if (shouldPreventDefault) e.preventDefault()
     if (onClick) onClick!()
   }
   return (
