@@ -8,4 +8,5 @@ export interface ButtonProps {
   theme?: buttonTheme
   isDisabled?: boolean
   className?: string
+  shouldPreventDefault?: boolean
 }

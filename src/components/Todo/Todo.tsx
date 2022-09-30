@@ -21,7 +21,7 @@ interface TodoProps {}
 const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
   const [isTodoFormOpened, setTodoFormOpened] = useState<boolean>(false)
   const [isSiderMenuOpened, setSiderMenuOpened] = useState<boolean>(false) // Mobile only
-  const [isMenuDisabled, setMenuDisabled] = useState<boolean>(false)
+  const [isListDisabled, setListDisabled] = useState<boolean>(false)
   const [isTagsDisabled, setTagsDisabled] = useState<boolean>(true)
 
   const location = useLocation()
@@ -34,7 +34,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
 
   useEffect(() => {
     setItemList(todos)
-  }, [todos])
+  }, [todos, search])
 
   useEffect(() => {
     setCurrentList(getCurrentList(location.pathname))
@@ -42,19 +42,29 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
 
   const setMenu = (value: boolean) => {
     setTagsDisabled(value)
-    setMenuDisabled(value)
+    setListDisabled(value)
+  }
+
+  const resetItemList = () => {
+    setItemList(todos)
   }
 
   const onSearchHandler = (e: React.MouseEvent) => {
     e.preventDefault()
     if (!search) {
       setMenu(false)
-      setItemList(todos)
+      resetItemList()
       return
     }
-    const filtered = itemList[currentList].items.filter((item) => {
-      return item.title.includes(search)
-    })
+    const filtered = itemList[currentList].items
+      .filter((item) => {
+        return item.title.includes(search)
+      })
+      .map((item) => {
+        const newItem = { ...item }
+        newItem.title = item.title.replaceAll(search, `<b>${search}</b>`)
+        return newItem
+      })
     setMenu(true)
     setItemList((prev) => {
       return {
@@ -103,7 +113,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
                   end
                   to={RouterPathsEnum.MY_TASKS}
                   className={`todo-menu__item-link ${
-                    isMenuDisabled ? '--disabled' : ''
+                    isListDisabled ? '--disabled' : ''
                   }`}
                 >
                   <Icon type='mail' className='todo-menu__item-icon' />
@@ -114,7 +124,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
                 <NavLink
                   to={RouterPathsEnum.IMPORTANT}
                   className={`todo-menu__item-link ${
-                    isMenuDisabled ? '--disabled' : ''
+                    isListDisabled ? '--disabled' : ''
                   }`}
                 >
                   <Icon type='star' className='todo-menu__item-icon' />
@@ -125,7 +135,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
                 <NavLink
                   to={RouterPathsEnum.COMPLETED}
                   className={`todo-menu__item-link ${
-                    isMenuDisabled ? '--disabled' : ''
+                    isListDisabled ? '--disabled' : ''
                   }`}
                 >
                   <Icon type='check' className='todo-menu__item-icon' />
@@ -136,7 +146,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
                 <NavLink
                   to={RouterPathsEnum.DELETED}
                   className={`todo-menu__item-link ${
-                    isMenuDisabled ? '--disabled' : ''
+                    isListDisabled ? '--disabled' : ''
                   }`}
                 >
                   <Icon type='bucket' className='todo-menu__item-icon' />

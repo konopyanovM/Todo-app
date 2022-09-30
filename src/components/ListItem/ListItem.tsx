@@ -41,9 +41,10 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
           />
         </span>
       )}
-      <Typography type='text' className='list-item__title'>
-        {item.title}
-      </Typography>
+      <p
+        dangerouslySetInnerHTML={{ __html: item.title }}
+        className='list-item__title'
+      ></p>
       <ul className='list-badges'>
         {item.badges.map((badge, index) => {
           return (
