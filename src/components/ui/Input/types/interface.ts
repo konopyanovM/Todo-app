@@ -7,6 +7,7 @@ export interface InputProps {
   id?: string
   register?: UseFormRegisterReturn
   type?: HTMLInputTypeAttribute
+  value?: string
   label?: string
   isError?: boolean
   errorMessage?: string

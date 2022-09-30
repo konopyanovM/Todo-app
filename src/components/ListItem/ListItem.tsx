@@ -20,6 +20,7 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
   // Redux
   const dispatch = useDispatch()
   //
+  if (!item) return null
 
   const deleteHandler = () => {
     dispatch(deleteItem({ id: item.id, listType }))
@@ -28,6 +29,7 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
   const restoreHandler = () => {
     dispatch(restoreItem(item.id))
   }
+
   return (
     <span className={`list-item ${isImportant && '--important'}`}>
       {!isDeleted && (

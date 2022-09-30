@@ -12,6 +12,13 @@ export enum RouterEnum {
   DELETED = 'deleted',
 }
 
+export enum ListTypeEnum {
+  CURRENT = 'current',
+  IMPORTANT = 'important',
+  COMPLETED = 'completed',
+  DELETED = 'deleted',
+}
+
 export enum RouterPathsEnum {
   MY_TASKS = '/',
   IMPORTANT = '/important',

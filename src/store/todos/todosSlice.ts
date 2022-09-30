@@ -4,7 +4,7 @@ import { List, ListItem } from '../../components/List/types/interface'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../rootReducer'
 
-interface TodosState {
+export interface TodosState {
   current: List
   important: List
   completed: List
@@ -74,11 +74,13 @@ const todosSlice = createSlice({
       state.current.items.push(restoredItem)
       setItem(LS_TODOS, state)
     },
+    completeItem: (state, { payload }: PayloadAction<number>) => {},
   },
 })
 
 export const { addItem, deleteItem, restoreItem } = todosSlice.actions
 
 export const selectTodos = (state: RootState) => state.todos
+export const selectTodosState = (state: RootState) => state
 
 export default todosSlice.reducer

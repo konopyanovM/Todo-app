@@ -1,10 +1,12 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { WithTranslation, withTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { NavLink, Route, Routes } from 'react-router-dom'
+import { NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import { RouterEnum, RouterPathsEnum, TagsEnum } from '../../constants'
-import { selectTodos } from '../../store/todos/todosSlice'
-import List from '../List'
+import { selectTodosState, TodosState } from '../../store/todos/todosSlice'
+import { getCurrentList } from '../../utils'
+import ListComponent from '../List'
+import { listType } from '../List/types'
 import Overlay from '../Overlay'
 import TodoForm from '../TodoForm'
 import Button from '../ui/Button'
@@ -20,9 +22,39 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
   const [isTodoFormOpened, setTodoFormOpened] = useState<boolean>(false)
   const [isSiderMenuOpened, setSiderMenuOpened] = useState<boolean>(false) // Mobile only
 
-  // Redux
-  const { current, deleted } = useSelector(selectTodos)
-  //
+  const location = useLocation()
+  const { todos } = useSelector(selectTodosState)
+  const [currentList, setCurrentList] = useState<listType>(
+    getCurrentList(location.pathname),
+  )
+  const [itemList, setItemList] = useState<TodosState>(todos)
+  const [search, setSearch] = useState<string>('')
+
+  useEffect(() => {
+    setItemList(todos)
+  }, [todos])
+
+  useEffect(() => {
+    setCurrentList(getCurrentList(location.pathname))
+  }, [location.pathname])
+
+  const onSearchHandler = () => {
+    const filtered = itemList[currentList].items.filter((item) => {
+      return item.title.includes(search)
+    })
+    setItemList((prev) => {
+      console.log(prev[currentList])
+
+      return {
+        ...prev,
+        [currentList]: {
+          ...prev[currentList],
+          items: filtered,
+        },
+      }
+    })
+    console.log(itemList)
+  }
 
   const openTodoForm = () => {
     setTodoFormOpened(true)
@@ -115,8 +147,17 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
         <div className='todo-body'>
           <div className='todo-body__wrapper'>
             <div className='todo-search'>
-              <Icon type='search' />
-              <Input theme='ghost' placeholder={t('search')}></Input>
+              <div className='todo-search__button' onClick={onSearchHandler}>
+                <Icon type='search' />
+              </div>
+              <Input
+                theme='ghost'
+                placeholder={t('search')}
+                value={search}
+                onChangeHandler={(e) => {
+                  setSearch(e.target.value)
+                }}
+              />
               <Button
                 onClick={openTodoForm}
                 className='todo-search__button --mobile'
@@ -135,11 +176,30 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
               <Routes>
                 <Route
                   path={RouterPathsEnum.MY_TASKS}
-                  element={<List title={t('myTodos')} data={current} />}
+                  element={
+                    <ListComponent
+                      title={t('myTodos')}
+                      data={itemList.current}
+                    />
+                  }
+                />
+                <Route
+                  path={RouterPathsEnum.COMPLETED}
+                  element={
+                    <ListComponent
+                      title={t('myTodos')}
+                      data={itemList.completed}
+                    />
+                  }
                 />
                 <Route
                   path={RouterPathsEnum.DELETED}
-                  element={<List title={t('myTodos')} data={deleted} />}
+                  element={
+                    <ListComponent
+                      title={t('myTodos')}
+                      data={itemList.deleted}
+                    />
+                  }
                 />
               </Routes>
             </div>

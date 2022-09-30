@@ -50,6 +50,7 @@
   top: -100%;
   opacity: 0;
 }
+
 /* Extra small devices (phones, 600px and down) */
 @media (max-width: 600px) {
   .--desktop {

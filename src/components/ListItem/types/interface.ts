@@ -1,7 +1,7 @@
 import { ListItem, listType } from '../../List/types'
 
 export interface ListItemProps {
-  item: ListItem
+  item: ListItem | null
   listType?: listType
   isImportant?: boolean
   isDeleted?: boolean

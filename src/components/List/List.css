@@ -2,6 +2,44 @@
   padding: 18px 20px;
   outline: 1px solid var(--color-card-border);
 }
+.list,
+.list__wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.list-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.list-body.--open {
+  overflow-y: scroll;
+}
+
+.list-body::-webkit-scrollbar {
+  width: 8px;
+}
+.list-body::-webkit-scrollbar-track {
+  background: var(--color-card-border);
+}
+.list-body::-webkit-scrollbar-thumb {
+  background-color: var(--color-body);
+  border-radius: 3px;
+  border-left: 1px solid var(--color-card-border);
+}
+
+.list-body__list-opener {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-heading);
+  cursor: pointer;
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media (max-width: 600px) {

@@ -9,6 +9,7 @@ const Input: FC<InputProps> = ({
   id,
   register,
   type = 'text',
+  value,
   label,
   isError = '',
   errorMessage,
@@ -32,6 +33,7 @@ const Input: FC<InputProps> = ({
         {...register}
         id={id}
         type={type}
+        value={value}
         placeholder={placeholder}
         className={`input ${type} --${theme} ${className} ${
           isError && '--error'

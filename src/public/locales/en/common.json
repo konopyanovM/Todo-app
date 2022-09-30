@@ -19,5 +19,6 @@
   "todoCompletionDate": "Todo completion date",
   "todoTitle": "Todo title",
   "theFieldMustNotBeEmpty": "The field must not be empty!",
-  "atLeastOneItemMustBeSelected": "At least one item must be selected!"
+  "atLeastOneItemMustBeSelected": "At least one item must be selected!",
+  "open{$}MoreTasks": "Open {{number}} more tasks"
 }

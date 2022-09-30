@@ -19,5 +19,6 @@
   "todoCompletionDate": "Дата завершения задачи",
   "todoTitle": "Название задачи",
   "theFieldMustNotBeEmpty": "Поле не должно быть пустым!",
-  "atLeastOneItemMustBeSelected": "По крайней мере один пункт должен быть выбран!"
+  "atLeastOneItemMustBeSelected": "По крайней мере один пункт должен быть выбран!",
+  "open{$}MoreTasks": "Открыть еще {{number}} задач"
 }
