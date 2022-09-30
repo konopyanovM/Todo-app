@@ -6,7 +6,6 @@ import { RootState } from '../rootReducer'
 
 export interface TodosState {
   current: List
-  important: List
   completed: List
   deleted: List
   id: number

@@ -33,10 +33,6 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
   const [search, setSearch] = useState<string>('')
 
   useEffect(() => {
-    setItemList(todos)
-  }, [todos, search])
-
-  useEffect(() => {
     setCurrentList(getCurrentList(location.pathname))
   }, [location.pathname])
 
@@ -48,6 +44,11 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
   const resetItemList = () => {
     setItemList(todos)
   }
+
+  useEffect(() => {
+    setMenu(false)
+    resetItemList()
+  }, [todos, search])
 
   const onSearchHandler = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -217,6 +218,16 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
                     <ListComponent
                       title={t('myTodos')}
                       data={itemList.current}
+                    />
+                  }
+                />
+                <Route
+                  path={RouterPathsEnum.IMPORTANT}
+                  element={
+                    <ListComponent
+                      title={t('myTodos')}
+                      data={itemList.current}
+                      isImportant={true}
                     />
                   }
                 />

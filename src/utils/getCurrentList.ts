@@ -8,8 +8,6 @@ export const getCurrentList = (
   switch (pathName) {
     case RouterPathsEnum.MY_TASKS:
       return ListTypeEnum.CURRENT
-    case RouterPathsEnum.IMPORTANT:
-      return ListTypeEnum.IMPORTANT
     case RouterPathsEnum.COMPLETED:
       return ListTypeEnum.COMPLETED
     case RouterPathsEnum.DELETED:

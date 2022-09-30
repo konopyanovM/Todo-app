@@ -5,7 +5,12 @@ import Typography from '../ui/Typography'
 import './List.css'
 import { ListProps } from './types'
 
-const List: FC<ListProps & WithTranslation> = ({ title, data, t }) => {
+const List: FC<ListProps & WithTranslation> = ({
+  data,
+  title,
+  isImportant = false,
+  t,
+}) => {
   const MAX_ITEMS_PER_PAGE = 5
 
   const [isOpen, setOpen] = useState<boolean>(false)
@@ -41,6 +46,20 @@ const List: FC<ListProps & WithTranslation> = ({ title, data, t }) => {
         <div className={`list-body ${isOpen && '--open'}`}>
           <ul className='list-items'>
             {currentItems.map((item, index) => {
+              if (isImportant) {
+                if (item.isImportant)
+                  return (
+                    <li key={index}>
+                      <ListItem
+                        item={item}
+                        isDeleted={isDeleted}
+                        listType={data.listType}
+                        checkboxHandler={checkboxHandler}
+                      />
+                    </li>
+                  )
+                return null
+              }
               return (
                 <li key={index}>
                   <ListItem
