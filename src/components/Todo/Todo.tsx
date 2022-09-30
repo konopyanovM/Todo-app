@@ -39,6 +39,10 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
   }, [location.pathname])
 
   const onSearchHandler = () => {
+    if (!search) {
+      setItemList(todos)
+      return
+    }
     const filtered = itemList[currentList].items.filter((item) => {
       return item.title.includes(search)
     })
@@ -53,7 +57,6 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
         },
       }
     })
-    console.log(itemList)
   }
 
   const openTodoForm = () => {
