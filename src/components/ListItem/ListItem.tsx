@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { WithTranslation, withTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { deleteItem, restoreItem } from '../../store/todos/todosSlice'
@@ -14,12 +14,12 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
   listType = 'current',
   isImportant,
   isDeleted = false,
-  checkboxHandler,
   t,
 }) => {
   // Redux
   const dispatch = useDispatch()
   //
+  const [isCompleted, setCompleted] = useState(item?.isCompleted)
   if (!item) return null
 
   const deleteHandler = () => {
@@ -30,13 +30,15 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
     dispatch(restoreItem(item.id))
   }
 
+  const checkboxHandler = () => {}
+
   return (
     <span className={`list-item ${isImportant && '--important'}`}>
       {!isDeleted && (
         <span className='list-item__checkbox'>
           <Input
             type='checkbox'
-            checked={item.isCompleted}
+            checked={isCompleted}
             onChangeHandler={checkboxHandler}
           />
         </span>

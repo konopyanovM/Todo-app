@@ -63,21 +63,48 @@ const todosSlice = createSlice({
       state.deleted.items.push(deletedItem)
       setItem(LS_TODOS, state)
     },
-    restoreItem: (state, { payload }: PayloadAction<number>) => {
+    restoreItem: (state, { payload: id }: PayloadAction<number>) => {
       const restoredItem = state.deleted.items.filter((item) => {
-        return item.id === payload
+        return item.id === id
       })[0]
       state.deleted.items = state.deleted.items.filter((item) => {
-        return item.id !== payload
+        return item.id !== id
       })
       state.current.items.push(restoredItem)
       setItem(LS_TODOS, state)
     },
-    completeItem: (state, { payload }: PayloadAction<number>) => {},
+    completeItem: (state, { payload: id }: PayloadAction<number>) => {
+      const completedItem = state.current.items.filter((item) => {
+        return item.id === id
+      })[0]
+      completedItem.isCompleted = true
+      state.current.items = state.current.items.filter((item) => {
+        return item.id !== id
+      })
+      state.completed.items.push(completedItem)
+      setItem(LS_TODOS, state)
+    },
+    unCompleteItem: (state, { payload: id }: PayloadAction<number>) => {
+      const unCompletedItem = state.completed.items.filter((item) => {
+        return item.id === id
+      })[0]
+      unCompletedItem.isCompleted = false
+      state.completed.items = state.completed.items.filter((item) => {
+        return item.id !== id
+      })
+      state.current.items.push(unCompletedItem)
+      setItem(LS_TODOS, state)
+    },
   },
 })
 
-export const { addItem, deleteItem, restoreItem } = todosSlice.actions
+export const {
+  addItem,
+  deleteItem,
+  restoreItem,
+  completeItem,
+  unCompleteItem,
+} = todosSlice.actions
 
 export const selectTodos = (state: RootState) => state.todos
 export const selectTodosState = (state: RootState) => state
