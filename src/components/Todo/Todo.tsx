@@ -9,6 +9,7 @@ import ListComponent from '../List'
 import { listType } from '../List/types'
 import Overlay from '../Overlay'
 import TodoForm from '../TodoForm'
+import { badge } from '../ui/Badge/types'
 import Button from '../ui/Button'
 import Icon from '../ui/Icon'
 import Input from '../ui/Input'
@@ -23,6 +24,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
   const [isSiderMenuOpened, setSiderMenuOpened] = useState<boolean>(false) // Mobile only
   const [isListDisabled, setListDisabled] = useState<boolean>(false)
   const [isTagsDisabled, setTagsDisabled] = useState<boolean>(true)
+  const [activeTags, setActiveTags] = useState<badge[]>([])
 
   const location = useLocation()
   const { todos } = useSelector(selectTodosState)
@@ -36,13 +38,49 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
     setCurrentList(getCurrentList(location.pathname))
   }, [location.pathname])
 
+  const resetItemList = () => {
+    setItemList(todos)
+  }
+
+  useEffect(() => {
+    if (!activeTags.length) resetItemList()
+    else
+      setItemList(() => {
+        const newList = todos[currentList].items.filter((value) => {
+          return !!value.badges.filter((badge) => {
+            return activeTags.includes(badge)
+          }).length
+        })
+        return {
+          ...todos,
+          [currentList]: {
+            ...todos[currentList],
+            items: newList,
+          },
+        }
+      })
+  }, [activeTags])
+
   const setMenu = (value: boolean) => {
     setTagsDisabled(value)
     setListDisabled(value)
   }
 
-  const resetItemList = () => {
-    setItemList(todos)
+  const isTagActive = (tag: badge, array: badge[] = []): boolean => {
+    return !!array.filter((item) => {
+      return item === tag
+    }).length
+  }
+
+  const toggleTag = (tag: badge) => {
+    return () => {
+      const array = [...activeTags]
+      const index = array.indexOf(tag)
+
+      if (index !== -1) array.splice(index, 1)
+      else array.push(tag)
+      setActiveTags(array)
+    }
   }
 
   useEffect(() => {
@@ -159,22 +197,41 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
               <Typography type='small text'>{t('tags')}</Typography>
               <ul className='todo-tags'>
                 <li>
-                  <Tag isActive={true} isDisabled={isTagsDisabled}>
+                  <Tag
+                    isActive={isTagActive(TagsEnum.PRODUCTIVITY, activeTags)}
+                    isDisabled={isTagsDisabled}
+                    onClickHandler={toggleTag(TagsEnum.PRODUCTIVITY)}
+                  >
                     {t(TagsEnum.PRODUCTIVITY)}
                   </Tag>
                 </li>
                 <li>
-                  <Tag type='success' isDisabled={isTagsDisabled}>
+                  <Tag
+                    isActive={isTagActive(TagsEnum.EDUCATION, activeTags)}
+                    type='success'
+                    isDisabled={isTagsDisabled}
+                    onClickHandler={toggleTag(TagsEnum.EDUCATION)}
+                  >
                     {t(TagsEnum.EDUCATION)}
                   </Tag>
                 </li>
                 <li>
-                  <Tag type='warning' isDisabled={isTagsDisabled}>
+                  <Tag
+                    isActive={isTagActive(TagsEnum.HEALTH, activeTags)}
+                    type='warning'
+                    isDisabled={isTagsDisabled}
+                    onClickHandler={toggleTag(TagsEnum.HEALTH)}
+                  >
                     {t(TagsEnum.HEALTH)}
                   </Tag>
                 </li>
                 <li>
-                  <Tag type='danger' isDisabled={isTagsDisabled}>
+                  <Tag
+                    isActive={isTagActive(TagsEnum.URGENT, activeTags)}
+                    type='danger'
+                    isDisabled={isTagsDisabled}
+                    onClickHandler={toggleTag(TagsEnum.URGENT)}
+                  >
                     {t(TagsEnum.URGENT)}
                   </Tag>
                 </li>

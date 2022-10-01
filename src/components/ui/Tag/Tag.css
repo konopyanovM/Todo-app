@@ -21,6 +21,7 @@
 }
 
 .tag.active:not(.--disabled) {
+  margin-left: 5px;
   border: 1px solid var(--purple-1);
   border-radius: 5px;
 }

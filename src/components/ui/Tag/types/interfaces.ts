@@ -8,4 +8,5 @@ export interface TagProps {
   isDisabled?: boolean
   type?: tag
   className?: string
+  onClickHandler?: React.MouseEventHandler<HTMLSpanElement>
 }
