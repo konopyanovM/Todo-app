@@ -12,7 +12,19 @@ const List: FC<ListProps & WithTranslation> = ({
   isImportant = false,
   t,
 }) => {
-  const MAX_ITEMS_PER_PAGE = 5
+  const [width, setWidth] = useState<number>(window.innerWidth)
+  const handleWindowSizeChange = () => {
+    setWidth(window.innerWidth)
+  }
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange)
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange)
+    }
+  }, [])
+  const isMobile = width <= 768
+
+  const MAX_ITEMS_PER_PAGE = isMobile ? 12 : 5
   const locationPath = useLocation().pathname
   const [itemList, setItemList] = useState(() => {
     if (isImportant) return data.items.filter((item) => item.isImportant)
@@ -40,7 +52,7 @@ const List: FC<ListProps & WithTranslation> = ({
   const amountItemsLeft = itemList.length - currentItems.length
 
   const shouldDisplayOpener =
-    !isOpen && amountItemsLeft > 0 && currentItems.length <= 5
+    !isOpen && amountItemsLeft > 0 && currentItems.length <= MAX_ITEMS_PER_PAGE
 
   const checkboxHandler = () => {}
 
