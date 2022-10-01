@@ -1,7 +1,10 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { WithTranslation, withTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import { deleteItem, restoreItem } from '../../store/todos/todosSlice'
+import { getCurrentList } from '../../utils'
+import { listType } from '../List/types'
 import Badge from '../ui/Badge'
 import Icon from '../ui/Icon'
 import Input from '../ui/Input'
@@ -12,13 +15,23 @@ import { ListItemProps } from './types'
 const ListItem: FC<ListItemProps & WithTranslation> = ({
   item,
   listType = 'current',
-  isImportant,
+  isImportant = false,
   isDeleted = false,
   t,
 }) => {
   // Redux
   const dispatch = useDispatch()
   //
+  const locationPath = useLocation().pathname
+  const [currentList, setCurrentList] = useState<listType>(
+    getCurrentList(locationPath),
+  )
+  useEffect(() => {
+    setCurrentList(getCurrentList(locationPath))
+  }, [locationPath])
+
+  const isImportantList = currentList === 'important'
+
   const [isCompleted, setCompleted] = useState(item?.isCompleted)
   if (!item) return null
 
@@ -33,7 +46,11 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
   const checkboxHandler = () => {}
 
   return (
-    <span className={`list-item ${isImportant && '--important'}`}>
+    <span
+      className={`list-item ${
+        isImportant && !isImportantList && '--important'
+      }`}
+    >
       {!isDeleted && (
         <span className='list-item__checkbox'>
           <Input

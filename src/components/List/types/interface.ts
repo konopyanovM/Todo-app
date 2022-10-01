@@ -1,7 +1,7 @@
 import { badge } from './../../ui/Badge/types/interfaces'
 import { ReactNode } from 'react'
 
-export type listType = 'current' | 'completed' | 'deleted'
+export type listType = 'current' | 'completed' | 'deleted' | 'important'
 export interface List {
   listType: listType
   items: ListItem[]
