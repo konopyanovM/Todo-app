@@ -47,7 +47,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
 
   useEffect(() => {
     setMenu(false)
-    resetItemList()
+    setItemList(todos)
   }, [todos, search])
 
   const onSearchHandler = (e: React.MouseEvent) => {
@@ -59,7 +59,7 @@ const Todo: FC<TodoProps & WithTranslation> = ({ t }) => {
     }
     const filtered = itemList[currentList].items
       .filter((item) => {
-        return item.title.includes(search)
+        return item.title.toLowerCase().includes(search.toLowerCase())
       })
       .map((item) => {
         const newItem = { ...item }
