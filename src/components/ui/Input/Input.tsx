@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import Icon from '../Icon'
 import Typography from '../Typography'
 import { typography } from '../Typography/types'
@@ -15,10 +15,11 @@ const Input: FC<InputProps> = ({
   errorMessage,
   theme = 'default',
   placeholder,
-  checked = false,
+  checked: checkedProp,
   className = '',
   onChangeHandler = () => {},
 }) => {
+  const [checked, setChecked] = useState<boolean>(false)
   const isCheckbox = type === 'checkbox'
   const labelTypographyType: typography = isCheckbox ? 'text' : 'small text'
 
@@ -34,11 +35,15 @@ const Input: FC<InputProps> = ({
         id={id}
         type={type}
         value={value}
+        checked={checkedProp !== undefined ? checkedProp : checked}
         placeholder={placeholder}
         className={`input ${type} --${theme} ${className} ${
           isError && '--error'
         }`}
-        onChange={onChangeHandler}
+        onChange={(e) => {
+          setChecked(!checked)
+          onChangeHandler(e)
+        }}
       />
       <span className='custom-checkbox'>
         <Icon type='check' size='small' className='custom-checkbox__icon' />

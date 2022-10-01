@@ -2,7 +2,12 @@ import { FC, useEffect, useState } from 'react'
 import { WithTranslation, withTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { deleteItem, restoreItem } from '../../store/todos/todosSlice'
+import {
+  completeItem,
+  deleteItem,
+  restoreItem,
+  unCompleteItem,
+} from '../../store/todos/todosSlice'
 import { getCurrentList } from '../../utils'
 import { listType } from '../List/types'
 import Badge from '../ui/Badge'
@@ -33,6 +38,11 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
   const isImportantList = currentList === 'important'
 
   const [isCompleted, setCompleted] = useState(item?.isCompleted)
+
+  useEffect(() => {
+    setCompleted(item?.isCompleted)
+  }, [item?.isCompleted])
+
   if (!item) return null
 
   const deleteHandler = () => {
@@ -43,7 +53,10 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
     dispatch(restoreItem(item.id))
   }
 
-  const checkboxHandler = () => {}
+  const checkboxHandler = () => {
+    if (!item.isCompleted) dispatch(completeItem(item.id))
+    if (item.isCompleted) dispatch(unCompleteItem(item.id))
+  }
 
   return (
     <span
