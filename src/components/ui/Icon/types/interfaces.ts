@@ -10,6 +10,7 @@ type icon =
   | 'cross'
   | 'arrow-left'
   | 'arrow-right'
+  | 'exclamation-mark'
 
 type iconSize = 'small' | 'medium' | 'large'
 
@@ -18,4 +19,5 @@ export interface IconProps {
   size?: iconSize
   fill?: string
   className?: string
+  initialSize?: boolean
 }

@@ -23,6 +23,22 @@
   border: 1px solid var(--color-primary-2);
 }
 
+.button.ghost-danger {
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
+  background: none;
+}
+
+.button.ghost-danger:hover {
+  color: var(--color-danger-2);
+  border: 1px solid var(--color-danger-2);
+}
+
+.button.large {
+  padding: 12px 26px 12px;
+  font-size: 14px;
+}
+
 /* Disabled */
 
 .button.--disabled {

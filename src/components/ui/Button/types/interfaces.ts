@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-type buttonTheme = 'default' | 'ghost'
-
+type buttonTheme = 'default' | 'ghost' | 'ghost-danger'
+type buttonSize = 'medium' | 'large'
 export interface ButtonProps {
   children: ReactNode
   value?: string | number
@@ -9,4 +9,5 @@ export interface ButtonProps {
   isDisabled?: boolean
   className?: string
   shouldPreventDefault?: boolean
+  size?: buttonSize
 }

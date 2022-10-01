@@ -1,0 +1,48 @@
+.confirm-modal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-modal__card {
+  padding: 2.5rem 1.5rem;
+  min-width: 512px;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  background-color: var(--color-card);
+  outline: 1px solid var(--color-card-border);
+}
+
+.confirm-modal__title {
+  text-align: center;
+}
+
+.confirm-modal__text {
+  text-align: center;
+}
+
+.confirm-modal__button-group {
+  margin-top: 1rem;
+  display: flex;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .confirm-modal {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+  }
+  .confirm-modal__card {
+    min-width: 100%;
+    border-radius: 0;
+  }
+}

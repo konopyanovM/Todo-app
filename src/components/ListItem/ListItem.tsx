@@ -9,6 +9,7 @@ import {
   unCompleteItem,
 } from '../../store/todos/todosSlice'
 import { getCurrentList } from '../../utils'
+import ConfirmModal from '../ConfirmModal/ConfirmModal'
 import { listType } from '../List/types'
 import Badge from '../ui/Badge'
 import Icon from '../ui/Icon'
@@ -28,6 +29,7 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
   const dispatch = useDispatch()
   //
   const locationPath = useLocation().pathname
+  const [displayDeleteModal, setDisplayDeleteModal] = useState<boolean>(false)
   const [currentList, setCurrentList] = useState<listType>(
     getCurrentList(locationPath),
   )
@@ -46,7 +48,16 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
   if (!item) return null
 
   const deleteHandler = () => {
+    setDisplayDeleteModal(true)
+  }
+
+  const confirmDeleteHandler = () => {
     dispatch(deleteItem({ id: item.id, listType }))
+    setDisplayDeleteModal(false)
+  }
+
+  const cancelDeleteHandler = () => {
+    setDisplayDeleteModal(false)
   }
 
   const restoreHandler = () => {
@@ -100,6 +111,15 @@ const ListItem: FC<ListItemProps & WithTranslation> = ({
             <Icon type='dots' size='large'></Icon>
           </div>
         </>
+      )}
+      {displayDeleteModal && (
+        <ConfirmModal
+          title={t('areYouSure')}
+          onConfirm={confirmDeleteHandler}
+          onCancel={cancelDeleteHandler}
+        >
+          {t('youCantRestoreIt')}
+        </ConfirmModal>
       )}
     </span>
   )

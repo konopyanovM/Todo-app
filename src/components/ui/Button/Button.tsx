@@ -10,6 +10,7 @@ const Button: FC<ButtonProps> = ({
   isDisabled = false,
   className = '',
   shouldPreventDefault = true,
+  size = 'medium',
 }) => {
   const onClickHandler = (e: React.MouseEvent) => {
     if (shouldPreventDefault) e.preventDefault()
@@ -17,7 +18,9 @@ const Button: FC<ButtonProps> = ({
   }
   return (
     <button
-      className={`button ${theme} ${isDisabled && '--disabled'} ${className}`}
+      className={`button ${theme} ${size} ${
+        isDisabled && '--disabled'
+      } ${className}`}
       value={value}
       onClick={onClickHandler}
     >

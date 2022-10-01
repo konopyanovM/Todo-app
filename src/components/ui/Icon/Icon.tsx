@@ -2,7 +2,13 @@ import { FC } from 'react'
 import './Icon.css'
 import { IconProps } from './types'
 
-const Icon: FC<IconProps> = ({ type, size = 'medium', fill, className }) => {
+const Icon: FC<IconProps> = ({
+  type,
+  size = 'medium',
+  fill,
+  initialSize,
+  className,
+}) => {
   let icon
   switch (type) {
     case 'arrow-left':
@@ -38,12 +44,15 @@ const Icon: FC<IconProps> = ({ type, size = 'medium', fill, className }) => {
     case 'search':
       icon = require('../../../assets/images/search.svg')
       break
+    case 'exclamation-mark':
+      icon = require('../../../assets/images/exclamation-mark.svg')
+      break
   }
   const IconComponent = icon.ReactComponent
 
   return (
     <IconComponent
-      className={`icon ${size} ${className}`}
+      className={`icon ${initialSize ? '' : size} ${className}`}
       style={{ color: fill }}
     ></IconComponent>
   )
