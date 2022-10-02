@@ -45,7 +45,7 @@ const todosSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, { payload }: PayloadAction<ListItem>) => {
-      state.current.items.push(payload)
+      state.current.items.unshift(payload)
       state.id++
       setItem(LS_TODOS, state)
     },
@@ -61,7 +61,7 @@ const todosSlice = createSlice({
         },
       )
       // Добавляем ее в удаленные
-      state.deleted.items.push(deletedItem)
+      state.deleted.items.unshift(deletedItem)
       setItem(LS_TODOS, state)
     },
     restoreItem: (state, { payload: id }: PayloadAction<number>) => {
@@ -71,7 +71,7 @@ const todosSlice = createSlice({
       state.deleted.items = state.deleted.items.filter((item) => {
         return item.id !== id
       })
-      state.current.items.push(restoredItem)
+      state.current.items.unshift(restoredItem)
       setItem(LS_TODOS, state)
     },
     completeItem: (state, { payload: id }: PayloadAction<number>) => {
@@ -82,7 +82,7 @@ const todosSlice = createSlice({
       state.current.items = state.current.items.filter((item) => {
         return item.id !== id
       })
-      state.completed.items.push(completedItem)
+      state.completed.items.unshift(completedItem)
       setItem(LS_TODOS, state)
     },
     unCompleteItem: (state, { payload: id }: PayloadAction<number>) => {
@@ -93,7 +93,7 @@ const todosSlice = createSlice({
       state.completed.items = state.completed.items.filter((item) => {
         return item.id !== id
       })
-      state.current.items.push(unCompletedItem)
+      state.current.items.unshift(unCompletedItem)
       setItem(LS_TODOS, state)
     },
   },
