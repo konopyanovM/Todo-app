@@ -135,7 +135,7 @@
     justify-content: flex-end;
   }
   .todo-search {
-    padding: 10px 15px;
+    padding: 10px 6px;
     gap: 0.5rem;
   }
   .todo-search__button {

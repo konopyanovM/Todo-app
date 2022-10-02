@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 import { WithTranslation, withTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
+import { getMobileItemsAmount } from '../../utils'
 import ListItem from '../ListItem'
 import Typography from '../ui/Typography'
 import './List.css'
@@ -13,8 +14,10 @@ const List: FC<ListProps & WithTranslation> = ({
   t,
 }) => {
   const [width, setWidth] = useState<number>(window.innerWidth)
+  const [height, setHeight] = useState<number>(window.innerHeight)
   const handleWindowSizeChange = () => {
     setWidth(window.innerWidth)
+    setHeight(window.innerHeight)
   }
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange)
@@ -22,9 +25,9 @@ const List: FC<ListProps & WithTranslation> = ({
       window.removeEventListener('resize', handleWindowSizeChange)
     }
   }, [])
-  const isMobile = width <= 768
+  const isMobile = width <= 767
 
-  const MAX_ITEMS_PER_PAGE = isMobile ? 12 : 5
+  const MAX_ITEMS_PER_PAGE = isMobile ? getMobileItemsAmount(height) : 5
   const locationPath = useLocation().pathname
   const [itemList, setItemList] = useState(() => {
     if (isImportant) return data.items.filter((item) => item.isImportant)

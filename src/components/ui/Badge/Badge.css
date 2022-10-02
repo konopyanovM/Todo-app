@@ -23,3 +23,71 @@
   color: var(--color-danger);
   background-color: var(--t-color-danger);
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+  .badge {
+    width: 1rem;
+    height: 1rem;
+  }
+  .badge.productivity {
+    background-color: var(--color-primary);
+  }
+  .badge.education {
+    background-color: var(--color-success);
+  }
+  .badge.health {
+    background-color: var(--color-warning);
+  }
+  .badge.urgent {
+    background-color: var(--color-danger);
+  }
+  .badge-text {
+    display: none;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (min-width: 600px) and (max-width: 767px) {
+  .badge {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 992px) {
+  .badge {
+    width: 1rem;
+    height: 1rem;
+  }
+  .badge.productivity {
+    background-color: var(--color-primary);
+  }
+  .badge.education {
+    background-color: var(--color-success);
+  }
+  .badge.health {
+    background-color: var(--color-warning);
+  }
+  .badge.urgent {
+    background-color: var(--color-danger);
+  }
+
+  .badge-text {
+    display: none;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .badge-text {
+    font-size: 14px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
