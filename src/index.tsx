@@ -8,6 +8,7 @@ import { ITEM_LIST } from './constants'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import './settings/i18n'
+import 'react-datepicker/dist/react-datepicker.css'
 
 loadLocaleStorage(ITEM_LIST, [])
 

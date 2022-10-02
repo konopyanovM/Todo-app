@@ -28,6 +28,7 @@ export enum RouterPathsEnum {
 
 export enum TodoFormEnum {
   TITLE = 'title',
+  COMPLETION_DATE = 'completionDate',
   END_DATE = 'endDate',
   IS_IMPORTANT = 'isImportant',
   DESCRIPTION = 'description',

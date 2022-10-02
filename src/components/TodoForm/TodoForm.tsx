@@ -80,7 +80,7 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
                 errorMessage={t(errors.title?.message as string)}
               />
               <Input
-                register={register(TodoFormEnum.END_DATE)}
+                register={register(TodoFormEnum.COMPLETION_DATE)}
                 label={t('todoCompletionDate')}
                 placeholder={t('todoTitle')}
               />
@@ -88,6 +88,12 @@ const TodoForm: FC<TodoFormProps & WithTranslation> = ({ closeHandler, t }) => {
                 register={register(TodoFormEnum.IS_IMPORTANT)}
                 label={t('importantTodo')}
                 type='checkbox'
+              />
+              <Input
+                register={register(TodoFormEnum.END_DATE)}
+                label={t('endDateAndTime')}
+                type='date'
+                placeholder={t('date')}
               />
               <Input
                 register={register(TodoFormEnum.DESCRIPTION, {

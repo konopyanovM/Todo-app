@@ -32,6 +32,14 @@
 .input.--error {
   border-color: red;
 }
+
+.input-icon {
+  position: absolute;
+  top: 27px;
+  right: 10px;
+  pointer-events: none;
+}
+
 /* Checkbox */
 
 .label.checkbox {
@@ -91,6 +99,57 @@
 
 .input.checkbox:checked + .custom-checkbox .custom-checkbox__icon {
   display: inline-block;
+}
+
+/* Date */
+
+.date .date-calendar {
+  border: none;
+  background-color: var(--color-body);
+}
+
+.date .react-datepicker__triangle {
+  display: none;
+}
+
+.date .react-datepicker__header {
+  border-bottom: none;
+  background-color: transparent;
+}
+
+.date .react-datepicker__day,
+.date .react-datepicker__day-name,
+.date .react-datepicker__current-month {
+  text-transform: capitalize;
+  color: var(--color-body-text);
+}
+
+.date .react-datepicker__day:hover {
+  border-radius: 50%;
+  background-color: transparent;
+  outline: 1px solid var(--color-primary);
+}
+
+.date .react-datepicker__day--keyboard-selected,
+.date .react-datepicker__day--selected {
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--white) !important;
+}
+
+.date .react-datepicker__day--selected:hover {
+  border-radius: 50%;
+  background-color: var(--color-primary-2);
+  color: var(--white);
+}
+
+.date .react-datepicker__day--weekend {
+  color: var(--color-muted-text);
+}
+
+.date .react-datepicker__navigation-icon::before {
+  border-width: 2px 2px 0 0;
+  border-color: var(--color-body-text);
 }
 
 /* Media queries */
